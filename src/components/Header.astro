@@ -1,6 +1,7 @@
 ---
 import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
 import { languages } from '../i18n/ui';
+import { siteConfig } from '../site';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -10,7 +11,7 @@ const navItems = [
   { name: t('nav.home'), href: translatePath('/') },
   { name: t('nav.features'), href: '#features' },
   { name: t('nav.about'), href: '#about' },
-  { name: t('nav.contact'), href: '#contact' },
+  { name: t('nav.resources'), href: '#resources' },
 ];
 ---
 
@@ -19,7 +20,7 @@ const navItems = [
     <div class="flex items-center gap-2">
       <a href={translatePath('/')} class="flex items-center gap-2">
         <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">M</div>
-        <span class="text-xl font-bold tracking-tight text-gray-900">MatchCore</span>
+        <span class="text-xl font-bold tracking-tight text-gray-900">{siteConfig.projectName}</span>
       </a>
     </div>
     
@@ -43,10 +44,24 @@ const navItems = [
         ))}
       </div>
       
-      <button class="text-sm font-medium text-gray-600 hover:text-gray-900">{t('nav.login')}</button>
-      <button class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors shadow-sm shadow-blue-200">
-        {t('nav.signup')}
-      </button>
+      <div class="hidden sm:flex items-center gap-3">
+        <a
+          href={siteConfig.docsUrl}
+          target="_blank"
+          rel="noreferrer"
+          class="text-sm font-medium text-gray-600 hover:text-gray-900"
+        >
+          {t('nav.docs')}
+        </a>
+        <a
+          href={siteConfig.demoUrl}
+          target="_blank"
+          rel="noreferrer"
+          class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors shadow-sm shadow-blue-200"
+        >
+          {t('nav.demo')}
+        </a>
+      </div>
     </div>
   </div>
 </header>
