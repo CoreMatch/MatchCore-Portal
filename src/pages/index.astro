@@ -1,17 +1,70 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Banner from '../components/Banner.astro';
 
+const features = [
+  {
+    title: '极速构建',
+    description: '使用预置的组件和模板，在几分钟内即可搭建起您的企业门户。',
+    icon: '⚡'
+  },
+  {
+    title: '深度定制',
+    description: '灵活的配置项和丰富的插件系统，满足您个性化的业务需求。',
+    icon: '🎨'
+  },
+  {
+    title: '安全可靠',
+    description: '企业级安全标准，保障您的数据隐私和系统稳定运行。',
+    icon: '🛡️'
+  }
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="MatchCore - 您的下一代数字化门户">
+	<Header />
+	<main>
+		<Banner />
+		
+		<section id="features" class="py-20 bg-gray-50">
+			<div class="container mx-auto px-4">
+				<div class="text-center mb-16">
+					<h2 class="text-3xl font-bold text-gray-900 mb-4">为什么选择 MatchCore？</h2>
+					<p class="text-gray-600 max-w-2xl mx-auto">
+						我们提供全方位的技术支持和灵活的解决方案，助您在数字化转型中占得先机。
+					</p>
+				</div>
+				
+				<div class="grid md:grid-cols-3 gap-8">
+					{features.map(feature => (
+						<div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+							<div class="text-4xl mb-6">{feature.icon}</div>
+							<h3 class="text-xl font-bold text-gray-900 mb-4">{feature.title}</h3>
+							<p class="text-gray-600 leading-relaxed">
+								{feature.description}
+							</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="py-20 bg-blue-600">
+			<div class="container mx-auto px-4 text-center">
+				<h2 class="text-3xl font-bold text-white mb-8">准备好提升团队效率了吗？</h2>
+				<button class="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition-colors shadow-lg">
+					免费开始使用
+				</button>
+			</div>
+		</section>
+	</main>
+
+	<footer class="bg-white border-t border-gray-100 py-12">
+		<div class="container mx-auto px-4 text-center">
+			<p class="text-gray-500 text-sm">
+				© 2026 MatchCore Portal. All rights reserved.
+			</p>
+		</div>
+	</footer>
+</Layout>

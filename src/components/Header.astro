@@ -1,0 +1,32 @@
+---
+const navItems = [
+  { name: '首页', href: '#' },
+  { name: '特性', href: '#features' },
+  { name: '关于', href: '#about' },
+  { name: '联系我们', href: '#contact' },
+];
+---
+
+<header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-100">
+  <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">M</div>
+      <span class="text-xl font-bold tracking-tight text-gray-900">MatchCore</span>
+    </div>
+    
+    <nav class="hidden md:flex items-center gap-8">
+      {navItems.map(item => (
+        <a href={item.href} class="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors">
+          {item.name}
+        </a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <button class="text-sm font-medium text-gray-600 hover:text-gray-900">登录</button>
+      <button class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors shadow-sm shadow-blue-200">
+        免费试用
+      </button>
+    </div>
+  </div>
+</header>
