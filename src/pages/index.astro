@@ -1,13 +1,24 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import HomePage from '../../components/HomePage.astro';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
-import { home } from '../../i18n/pages/home';
+import Layout from '../layouts/Layout.astro';
+import HomePage from '../components/HomePage.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { home } from '../i18n/pages/home';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang, home);
 ---
 
 <Layout title={t('meta.title')} description={t('meta.description')}>
-        <HomePage pageUi={home} />
+    <script is:inline>
+        // Check browser language for redirection
+        const userLang = navigator.language || navigator.userLanguage;
+        const isChinese = userLang.toLowerCase().startsWith('zh');
+        const hasRedirected = sessionStorage.getItem('hasRedirected');
+
+        if (isChinese && !hasRedirected) {
+            sessionStorage.setItem('hasRedirected', 'true');
+            window.location.pathname = '/zh-cn/';
+        }
+    </script>
+    <HomePage pageUi={home} />
 </Layout>

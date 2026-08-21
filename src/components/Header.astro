@@ -39,7 +39,7 @@ const navItems = [
             href={translatePath(Astro.url.pathname.replace(`/${lang}`, '') || '/', l)}
             class={`text-xs px-2 py-1 rounded-md transition-colors ${lang === l ? 'bg-gray-100 text-gray-900 font-bold' : 'text-gray-500 hover:text-gray-900'}`}
           >
-            {l === 'zh-CN' ? '中' : 'EN'}
+            {l === 'zh-cn' ? '中' : 'EN'}
           </a>
         ))}
       </div>

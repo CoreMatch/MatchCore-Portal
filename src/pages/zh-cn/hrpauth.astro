@@ -1,10 +1,10 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Banner from '../components/Banner.astro';
-import Header from '../components/Header.astro';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
-import { siteConfig } from '../site';
-import { hrpauth } from '../i18n/pages/hrpauth';
+import Layout from '../../layouts/Layout.astro';
+import Banner from '../../components/Banner.astro';
+import Header from '../../components/Header.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { siteConfig } from '../../site';
+import { hrpauth } from '../../i18n/pages/hrpauth';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang, hrpauth);

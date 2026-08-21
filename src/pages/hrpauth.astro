@@ -1,10 +1,10 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Banner from '../../components/Banner.astro';
-import Header from '../../components/Header.astro';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
-import { siteConfig } from '../../site';
-import { hrpauth } from '../../i18n/pages/hrpauth';
+import Layout from '../layouts/Layout.astro';
+import Banner from '../components/Banner.astro';
+import Header from '../components/Header.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { siteConfig } from '../site';
+import { hrpauth } from '../i18n/pages/hrpauth';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang, hrpauth);
@@ -31,6 +31,17 @@ const resources = [
 ---
 
 <Layout title={t('meta.title')} description={t('meta.description')}>
+  <script is:inline>
+    // Check browser language for redirection
+    const userLang = navigator.language || navigator.userLanguage;
+    const isChinese = userLang.toLowerCase().startsWith('zh');
+    const hasRedirected = sessionStorage.getItem('hasRedirected');
+
+    if (isChinese && !hasRedirected) {
+      sessionStorage.setItem('hasRedirected', 'true');
+      window.location.pathname = '/zh-cn/hrpauth/';
+    }
+  </script>
   <Header />
 
   <main>
