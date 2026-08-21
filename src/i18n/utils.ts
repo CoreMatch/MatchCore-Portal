@@ -1,4 +1,4 @@
-import { common } from './common';
+import common from './common.json';
 import { defaultLang, languages } from './ui';
 
 export function getLangFromUrl(url: URL) {

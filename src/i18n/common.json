@@ -1,0 +1,34 @@
+{
+  "zh-cn": {
+    "nav.home": "首页",
+    "nav.features": "功能特性",
+    "nav.about": "关于项目",
+    "nav.resources": "文档演示",
+    "nav.docs": "文档",
+    "nav.demo": "在线演示",
+    "nav.source": "源码",
+    "nav.login": "登录",
+    "nav.signup": "立即开始",
+    "footer.rights": "© 2026 MatchCore. 持续维护中的开源项目。",
+    "footer.docs": "文档",
+    "footer.demo": "演示",
+    "footer.source": "源码",
+    "footer.community": "社区协作"
+  },
+  "en": {
+    "nav.home": "Home",
+    "nav.features": "Features",
+    "nav.about": "About",
+    "nav.resources": "Docs & Demo",
+    "nav.docs": "Docs",
+    "nav.demo": "Live Demo",
+    "nav.source": "Source",
+    "nav.login": "Login",
+    "nav.signup": "Get Started",
+    "footer.rights": "© 2026 MatchCore. Open source and actively maintained.",
+    "footer.docs": "Docs",
+    "footer.demo": "Demo",
+    "footer.source": "Source",
+    "footer.community": "Community"
+  }
+}

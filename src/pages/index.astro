@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import HomePage from '../components/HomePage.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
-import { home } from '../i18n/pages/home';
+import home from '../i18n/pages/home.json';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang, home);

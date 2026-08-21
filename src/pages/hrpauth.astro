@@ -4,7 +4,7 @@ import Banner from '../components/Banner.astro';
 import Header from '../components/Header.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import { siteConfig } from '../site';
-import { hrpauth } from '../i18n/pages/hrpauth';
+import hrpauth from '../i18n/pages/hrpauth.json';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang, hrpauth);
