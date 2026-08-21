@@ -1,4 +1,8 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section class="relative py-20 overflow-hidden bg-white">
@@ -7,18 +11,18 @@
   <div class="container relative mx-auto px-4">
     <div class="max-w-3xl mx-auto text-center">
       <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 mb-6 leading-tight">
-        构建您的下一代 <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">数字化门户</span>
+        {t('banner.title')} <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">{t('banner.titleAccent')}</span>
       </h1>
       <p class="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed">
-        MatchCore 提供一站式企业门户解决方案，帮助您快速构建高性能、可扩展的数字化工作空间，提升团队协作效率。
+        {t('banner.description')}
       </p>
       
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a href="#" class="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all shadow-lg shadow-blue-200 hover:-translate-y-0.5">
-          立即开始
+          {t('banner.ctaPrimary')}
         </a>
         <a href="#" class="w-full sm:w-auto px-8 py-4 bg-white text-gray-700 border border-gray-200 rounded-xl font-semibold hover:bg-gray-50 transition-all hover:border-gray-300">
-          了解更多
+          {t('banner.ctaSecondary')}
         </a>
       </div>
 

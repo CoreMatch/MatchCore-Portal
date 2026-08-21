@@ -1,17 +1,26 @@
 ---
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+import { languages } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
 const navItems = [
-  { name: '首页', href: '#' },
-  { name: '特性', href: '#features' },
-  { name: '关于', href: '#about' },
-  { name: '联系我们', href: '#contact' },
+  { name: t('nav.home'), href: translatePath('/') },
+  { name: t('nav.features'), href: '#features' },
+  { name: t('nav.about'), href: '#about' },
+  { name: t('nav.contact'), href: '#contact' },
 ];
 ---
 
 <header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-100">
   <div class="container mx-auto px-4 h-16 flex items-center justify-between">
     <div class="flex items-center gap-2">
-      <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">M</div>
-      <span class="text-xl font-bold tracking-tight text-gray-900">MatchCore</span>
+      <a href={translatePath('/')} class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">M</div>
+        <span class="text-xl font-bold tracking-tight text-gray-900">MatchCore</span>
+      </a>
     </div>
     
     <nav class="hidden md:flex items-center gap-8">
@@ -23,9 +32,20 @@ const navItems = [
     </nav>
 
     <div class="flex items-center gap-4">
-      <button class="text-sm font-medium text-gray-600 hover:text-gray-900">登录</button>
+      <div class="flex items-center gap-2 border-r border-gray-200 pr-4 mr-2">
+        {Object.entries(languages).map(([l, label]) => (
+          <a 
+            href={translatePath(Astro.url.pathname.replace(`/${lang}`, '') || '/', l)}
+            class={`text-xs px-2 py-1 rounded-md transition-colors ${lang === l ? 'bg-gray-100 text-gray-900 font-bold' : 'text-gray-500 hover:text-gray-900'}`}
+          >
+            {l === 'zh-CN' ? '中' : 'EN'}
+          </a>
+        ))}
+      </div>
+      
+      <button class="text-sm font-medium text-gray-600 hover:text-gray-900">{t('nav.login')}</button>
       <button class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors shadow-sm shadow-blue-200">
-        免费试用
+        {t('nav.signup')}
       </button>
     </div>
   </div>
