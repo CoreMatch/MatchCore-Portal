@@ -4,8 +4,13 @@ import Header from './Header.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import { siteConfig } from '../site';
 
+interface Props {
+  pageUi?: any;
+}
+
+const { pageUi } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const t = useTranslations(lang, pageUi);
 
 const features = [
   { title: t('features.item1.title'), description: t('features.item1.desc'), icon: 'ID' },
@@ -31,7 +36,7 @@ const resources = [
 <Header />
 
 <main>
-  <Banner />
+  <Banner pageUi={pageUi} />
 
   <section id="features" class="bg-gray-50 py-20">
     <div class="container mx-auto px-4">

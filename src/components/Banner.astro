@@ -2,8 +2,13 @@
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import { siteConfig } from '../site';
 
+interface Props {
+  pageUi?: any;
+}
+
+const { pageUi } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const t = useTranslations(lang, pageUi);
 ---
 
 <section class="relative overflow-hidden bg-white py-20">
