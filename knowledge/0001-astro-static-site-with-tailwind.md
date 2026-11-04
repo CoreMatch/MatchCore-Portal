@@ -17,13 +17,16 @@ basic configuration").
 Build the portal as a fully static Astro site:
 
 - Astro ^7.2.4 is the framework, with Tailwind CSS v4 (^4.3.3) integrated through
-  `@tailwindcss/vite` as a Vite plugin (package.json:14-18, astro.config.mjs:14-16).
+  `@tailwindcss/vite` as a Vite plugin (package.json (field: @tailwindcss/vite),
+  astro.config.mjs::tailwindcss).
 - No SSR adapter dependency and no `output` override, so builds are fully static
-  (package.json:14-18, astro.config.mjs:6-17).
-- TypeScript strict mode via `astro/tsconfigs/strict` (tsconfig.json:2); Node
-  >= 22.12.0 required (package.json:5-7).
+  (package.json (field: dependencies), astro.config.mjs::defineConfig).
+- TypeScript strict mode via `astro/tsconfigs/strict`
+  (tsconfig.json (field: astro/tsconfigs/strict)); Node
+  >= 22.12.0 required (package.json (field: >=22.12.0)).
 - Pages are `.astro` components; copy lives in i18n JSON bundles; styling is Tailwind
-  utility classes plus one global import (src/styles/global.css:1).
+  utility classes plus one global import
+  (src/styles/global.css (field: @import "tailwindcss")).
 - AI-agent development guidance ships in-repo as AGENTS.md, with CLAUDE.md as a
   symlink to it (AGENTS.md:1-22).
 
@@ -39,12 +42,12 @@ Build the portal as a fully static Astro site:
   (see entry 0005).
 
 ## Evidence
-- package.json:1-19 (name matchcore-portal; engines node >=22.12.0; scripts
-  dev/build/preview; dependencies astro ^7.2.4, tailwindcss ^4.3.3,
-  @tailwindcss/vite ^4.3.3; no adapter dependency)
-- astro.config.mjs:1-17 (tailwindcss Vite plugin; i18n block; nothing else)
-- tsconfig.json:2 ("extends": "astro/tsconfigs/strict")
-- src/styles/global.css:1 (`@import "tailwindcss";`)
+- package.json (field: matchcore-portal) (name matchcore-portal; engines node
+  >=22.12.0; scripts dev/build/preview; dependencies astro ^7.2.4, tailwindcss
+  ^4.3.3, @tailwindcss/vite ^4.3.3; no adapter dependency)
+- astro.config.mjs::defineConfig (tailwindcss Vite plugin; i18n block; nothing else)
+- tsconfig.json (field: astro/tsconfigs/strict) ("extends": "astro/tsconfigs/strict")
+- src/styles/global.css (field: @import "tailwindcss") (`@import "tailwindcss";`)
 - AGENTS.md:1-22 (development and documentation guidance); CLAUDE.md is a symlink to
   AGENTS.md (repository root)
 - commit b80199e8088339911841080bd6133443190b5463 — Initial commit (AGPL-3.0 LICENSE

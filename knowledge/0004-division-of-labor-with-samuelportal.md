@@ -20,15 +20,16 @@ Observed arrangement:
   Arena and HRPAuth that send visitors outward to wiki.samuelcheston.com,
   auth.samuelcheston.com, and CoreMatch repositories (src/site.ts:1-16).
 - SamuelPortal is the author's personal portfolio at http://samuelcheston.com/
-  (SamuelPortal astro.config.mjs:9): English-only, with a homepage, a /projects
-  directory, and an /about page (SamuelPortal src/pages/index.astro, projects.astro,
-  about.astro; src/consts.ts:1-9). Its project directory describes MatchCore-Portal as
-  "A bilingual portal for the wider MatchCore ecosystem." (SamuelPortal
-  src/projects.ts:97).
+  (/home/lnb/SamuelPortal/astro.config.mjs (field: samuelcheston.com)): English-only,
+  with a homepage, a /projects directory, and an /about page (SamuelPortal
+  src/pages/index.astro, projects.astro, about.astro;
+  /home/lnb/SamuelPortal/src/consts.ts::SITE_TITLE). Its project directory describes
+  MatchCore-Portal as "A bilingual portal for the wider MatchCore ecosystem."
+  (/home/lnb/SamuelPortal/src/projects.ts (field: A bilingual portal for the wider MatchCore ecosystem)).
 - The two sites do not link to each other. MatchCore-Portal references only the
   wiki.* and auth.* subdomains plus GitHub (full URL scan of src/); SamuelPortal
   references MatchCore-Portal only by repository URL, never by a live site URL
-  (SamuelPortal src/projects.ts:97).
+  (/home/lnb/SamuelPortal/src/projects.ts (field: github.com/CoreMatch/MatchCore-Portal)).
 
 ## Consequences
 - Overlap risk: both sites describe the MatchCore ecosystem from different angles, and
@@ -39,7 +40,8 @@ Observed arrangement:
   is https://github.com/SamuelCheston/MatchCore-Portal.git — a stale URL in the
   directory (see entry 0005).
 - The two codebases are separate and have diverged technically (SamuelPortal is Astro
-  ^6.0.4 with MDX and sitemap, no i18n — SamuelPortal package.json:14-19 — while this
+  ^6.0.4 with MDX and sitemap, no i18n —
+  /home/lnb/SamuelPortal/package.json (field: @astrojs/mdx) — while this
   site is Astro ^7 with Tailwind and i18n), so nothing is shared between them.
 - Because the division of labor is inferred from content rather than stated anywhere,
   the intended scope boundary is pending author confirmation.
@@ -47,11 +49,16 @@ Observed arrangement:
 ## Evidence
 - This repository: src/site.ts:1-16; URL scan of src/ shows only
   wiki.samuelcheston.com, auth.samuelcheston.com, github.com/CoreMatch/*, and one
-  trae.ai image URL (src/components/Banner.astro:66)
-- SamuelPortal (read-only reference): astro.config.mjs:9 (site
-  'http://samuelcheston.com/'); package.json:14-19 (astro ^6.0.4, @astrojs/mdx,
-  @astrojs/sitemap; no i18n config); src/consts.ts:1-9; src/pages/index.astro:16-41;
-  src/pages/projects.astro:17-44; src/pages/about.astro:46-60; src/projects.ts:97
+  trae.ai image URL (src/components/Banner.astro (field: text_to_image))
+- SamuelPortal (read-only reference):
+  /home/lnb/SamuelPortal/astro.config.mjs (field: samuelcheston.com) (site
+  'http://samuelcheston.com/'); /home/lnb/SamuelPortal/package.json (field: @astrojs/mdx)
+  (astro ^6.0.4, @astrojs/mdx, @astrojs/sitemap; no i18n config);
+  /home/lnb/SamuelPortal/src/consts.ts::SITE_TITLE;
+  /home/lnb/SamuelPortal/src/pages/index.astro (field: hero-hello);
+  /home/lnb/SamuelPortal/src/pages/projects.astro (field: directory-intro);
+  /home/lnb/SamuelPortal/src/pages/about.astro (field: about-story);
+  /home/lnb/SamuelPortal/src/projects.ts (field: A bilingual portal for the wider MatchCore ecosystem)
 - SamuelPortal commit 2f7d11fd4366e9d1e80d6bdfab32a08e37068d77 — refactor: update
   personal portfolio site structure and content (added the MatchCore-Portal
   description)

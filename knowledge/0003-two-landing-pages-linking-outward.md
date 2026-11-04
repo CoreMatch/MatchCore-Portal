@@ -20,18 +20,19 @@ The site publishes exactly two pages, each with a zh-cn mirror:
 
 - `/` — the MatchCore Arena product landing: game-mode features (Bedwars, MLG-Rush,
   Skywars, Ultra Hardcore), Elo-MMR ranking and anti-cheat highlights, usage stats,
-  and resource cards (src/components/HomePage.astro:15-33,
-  src/i18n/pages/home.json:43-87).
+  and resource cards (src/components/HomePage.astro::features,
+  src/i18n/pages/home.json (field: Bedwars)).
 - `/hrpauth` — the HRPAuth service landing: unified-authentication and skin-management
-  features with technical highlights (src/pages/hrpauth.astro:12-30,
+  features with technical highlights (src/pages/hrpauth.astro::features,
   src/i18n/pages/hrpauth.json).
 
 All off-site destinations are centralized in src/site.ts and open in new tabs: docs ->
 https://wiki.samuelcheston.com/, demo -> https://auth.samuelcheston.com/, source and
 community -> CoreMatch/MatchCoreArena-Client and its issue tracker
-(src/site.ts:1-8). There is no rules page, no download page, and no links page; the
+(src/site.ts::siteConfig). There is no rules page, no download page, and no links page; the
 homepage primary CTA is labeled "Download"/"下载" but points at the docs URL
-(src/i18n/pages/home.json:6,47; src/components/Banner.astro:28-45).
+(src/i18n/pages/home.json (field: banner.ctaPrimary);
+src/components/Banner.astro (field: ctaPrimary)).
 
 ## Consequences
 - The portal is a signpost: it owns no documentation, demo, or issue tracker, so all
@@ -40,30 +41,40 @@ homepage primary CTA is labeled "Download"/"下载" but points at the docs URL
 - Content is visibly work-in-progress, which limits how much marketing weight the site
   can carry today:
   - English home features item5/item6 are placeholders ("gsd"/"gseg.", "Opmg"/"jiytr.")
-    (src/i18n/pages/home.json:65-68); the zh-cn bundle omits them and falls back to
-    those placeholders.
+    (src/i18n/pages/home.json (field: features.item5.title)); the zh-cn bundle omits
+    them and falls back to those placeholders.
   - Stats disagree between locales: zh-cn claims 5,000,000+ matches while en claims
-    500k+ (src/i18n/pages/home.json:11 vs :52).
-  - src/pages/hrpauth.astro:48 contains the malformed tag
-    `< Banner pageUi={hrpauth} />` (introduced by commit 9e34e9f3 and still present).
+    500k+ (src/i18n/pages/home.json (field: banner.stat2.value)).
+  - src/pages/hrpauth.astro (field: < Banner pageUi={hrpauth}) contains the malformed
+    tag `< Banner pageUi={hrpauth} />` (introduced by commit 9e34e9f3 and still
+    present).
   - The hero image is a hotlinked AI-generation URL whose prompt still describes
     "Minecraft authentication and skin management" — the site's earlier HRPAuth
-    orientation (src/components/Banner.astro:65-69).
+    orientation (src/components/Banner.astro (field: text_to_image)).
   - The shared Banner renders siteConfig.projectName ("MatchCore") as the H1 on every
-    page, including /hrpauth (src/components/Banner.astro:21-23, src/site.ts:2).
-- src/site.ts:9-16 defines `siteConfigHrpauth` with HRPAuth-specific endpoints, but
-  nothing imports it; the HRPAuth page imports `siteConfig` instead
-  (src/pages/hrpauth.astro:6), so its Docs/Demo/Source links point at
-  MatchCoreArena-Client rather than CoreMatch/HRPAuth. Whether this is a bug or
-  intentional reuse is pending author confirmation.
+    page, including /hrpauth (src/components/Banner.astro (field: siteConfig.projectName),
+    src/site.ts (field: projectName)).
+- src/site.ts::siteConfigHrpauth defines `siteConfigHrpauth` with HRPAuth-specific
+  endpoints, but nothing imports it; the HRPAuth page imports `siteConfig` instead
+  (src/pages/hrpauth.astro (field: import { siteConfig })), so its Docs/Demo/Source
+  links point at MatchCoreArena-Client rather than CoreMatch/HRPAuth. Whether this is
+  a bug or intentional reuse is pending author confirmation.
 
 ## Evidence
 - src/site.ts:1-16
-- src/components/HomePage.astro:15-33; src/components/Banner.astro:21-23, 28-45,
-  65-69; src/components/Header.astro:10-15, 47-64
-- src/pages/hrpauth.astro:6, 12-30, 48; src/i18n/pages/home.json:6, 11, 47, 52, 65-68;
-  src/i18n/pages/hrpauth.json:3, 50
-- src/i18n/common.json:12, 28 (footer "© 2026 MatchCore")
+- src/components/HomePage.astro::features;
+  src/components/Banner.astro (field: siteConfig.projectName),
+  src/components/Banner.astro (field: ctaPrimary),
+  src/components/Banner.astro (field: text_to_image);
+  src/components/Header.astro::navItems, src/components/Header.astro (field: nav.demo)
+- src/pages/hrpauth.astro (field: import { siteConfig }),
+  src/pages/hrpauth.astro::features,
+  src/pages/hrpauth.astro (field: < Banner pageUi={hrpauth});
+  src/i18n/pages/home.json (field: banner.ctaPrimary),
+  src/i18n/pages/home.json (field: banner.stat2.value),
+  src/i18n/pages/home.json (field: features.item5.title);
+  src/i18n/pages/hrpauth.json (field: meta.title)
+- src/i18n/common.json (field: footer.rights) (footer "© 2026 MatchCore")
 - commit 8068998a3866ee64da96d25b01abfaead8b73ef3 — feat: add hrpauth page for
   internationalized routing
 - commit 047b48f660ebf42ff3ef96bef265d4828f80d322 — content added (siteConfig
