@@ -8,10 +8,7 @@ accepted
 
 ## Context
 The project needed a small, content-first site for publishing product landing pages,
-with no dynamic server logic (no login, no API, no database). The repository was
-created on 2026-08-21 (commit b80199e8 "Initial commit") and the web project was
-initialized the same day (commit 510711e9 "chore: initialize new astro project with
-basic configuration").
+with no dynamic server logic (no login, no API, no database).
 
 ## Decision
 Build the portal as a fully static Astro site:
@@ -50,9 +47,3 @@ Build the portal as a fully static Astro site:
 - src/styles/global.css (field: @import "tailwindcss") (`@import "tailwindcss";`)
 - AGENTS.md:1-22 (development and documentation guidance); CLAUDE.md is a symlink to
   AGENTS.md (repository root)
-- commit b80199e8088339911841080bd6133443190b5463 — Initial commit (AGPL-3.0 LICENSE
-  plus title-only README)
-- commit 510711e9bbbb4042207bc9fc5a6fa0b281bf9585 — chore: initialize new astro
-  project with basic configuration
-- commit 65ad380606e29a138efe47475b2b2b7bf6686596 — feat: integrate Tailwind CSS and
-  build MatchCore portal homepage

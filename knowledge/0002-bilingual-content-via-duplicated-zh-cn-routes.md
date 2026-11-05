@@ -7,10 +7,7 @@ accepted
 2026-08-21
 
 ## Context
-The portal addresses both Chinese- and English-speaking audiences. Internationalization
-was introduced on the same day as the site itself (commit 548ed2c6, 2026-08-21) with
-default locale 'zh-CN'; during the page-bundle refactor the default was switched to
-'en' and the locale renamed 'zh-cn' (commit 9e34e9f3, 2026-08-21).
+The portal addresses both Chinese- and English-speaking audiences.
 
 ## Decision
 - Astro i18n is configured with `defaultLocale: 'en'`, `locales: ['zh-cn', 'en']`, and
@@ -57,13 +54,3 @@ default locale 'zh-CN'; during the page-bundle refactor the default was switched
   src/i18n/utils.ts::useTranslatedPath; src/i18n/ui.ts::defaultLang
 - src/i18n/common.json (field: nav.home); src/i18n/pages/home.json;
   src/i18n/pages/hrpauth.json
-- commit 548ed2c6a091d630af47ce3d10cbf7932f671f05 — feat(i18n): add
-  internationalization support for zh-CN and en locales (defaultLocale was 'zh-CN' in
-  astro.config.mjs at that commit)
-- commit 9e34e9f338391936e04948343d5edc42829d49f2 — feat(i18n): refactor translation
-  system to support page-specific bundles (defaultLocale 'zh-CN' -> 'en', locale
-  'zh-CN' -> 'zh-cn')
-- commit e4aea25e6d4a7ae6e2ce2d8c664ef02a6190ef21 — fix(i18n): correct language code
-  case and fix import paths (added the automatic redirect)
-- commit 48db1953d5cb6e972f5b274af893d369bc3e0e37 — refactor(i18n): migrate
-  translation files from TypeScript to JSON

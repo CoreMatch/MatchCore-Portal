@@ -1,9 +1,9 @@
 # Knowledge Base
 
 This knowledge base is the project's memo to itself, hosted and maintained in this
-repository. It records internal design decisions and history so that future work
-understands why things are the way they are; it does not define and does not override
-outward behavior. Outward behavior is defined by HA-Contract
+repository. It records internal design decisions so that future work understands why
+things are the way they are; entries describe the project's current state only, not
+its history. It does not define and does not override outward behavior. Outward behavior is defined by HA-Contract
 (https://github.com/SamuelCheston/HA-Contract). If an entry here ever conflicts with
 HA-Contract, fix the entry, not the contract.
 
@@ -21,9 +21,8 @@ HA-Contract, fix the entry, not the contract.
 
 - New entries are numbered sequentially as `NNNN-<slug>.md` starting from 0001 and use
   the fixed structure: Status / Date / Context / Decision / Consequences / Evidence.
-- Every claim must be checked against files or git history and cited in Evidence as
-  `path/to/file:Lstart-Lend` and/or a full commit hash plus subject. Anything that
-  cannot be verified is marked "not verified". Never fabricate.
+- Every claim must be checked against the repository's files and cited in Evidence
+  as `path/to/file:Lstart-Lend`. Anything that cannot be verified is marked
+  "not verified". Never fabricate.
 - Consequences must include costs and limitations, not only benefits.
-- Date is the date of the cited commit; write "not verified" when it cannot be
-  determined.
+- Date is the date the entry was recorded.
