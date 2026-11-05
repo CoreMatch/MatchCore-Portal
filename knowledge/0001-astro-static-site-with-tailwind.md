@@ -3,9 +3,6 @@
 ## Status
 accepted
 
-## Date
-2026-08-21
-
 ## Context
 The project needed a small, content-first site for publishing product landing pages,
 with no dynamic server logic (no login, no API, no database).

@@ -3,9 +3,6 @@
 ## Status
 accepted
 
-## Date
-2026-08-21
-
 ## Context
 Most repositories of the ecosystem this portal links to live under the CoreMatch
 GitHub organization (e.g., CoreMatch/MatchCoreArena-Client and CoreMatch/HRPAuth —

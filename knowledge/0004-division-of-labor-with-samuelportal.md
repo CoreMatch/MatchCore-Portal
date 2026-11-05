@@ -3,9 +3,6 @@
 ## Status
 accepted
 
-## Date
-2026-11-02
-
 ## Context
 The author maintains a second portal repository, SamuelPortal
 (github.com/SamuelCheston/SamuelPortal; consulted read-only for this entry). Both are

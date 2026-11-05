@@ -3,9 +3,6 @@
 ## Status
 accepted
 
-## Date
-2026-08-22
-
 ## Context
 The repository is a portal: it does not host the products themselves, so it had to
 settle what content it publishes and where visitors go for docs, demo, source, and

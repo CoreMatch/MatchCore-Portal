@@ -20,9 +20,8 @@ HA-Contract, fix the entry, not the contract.
 ## Maintenance
 
 - New entries are numbered sequentially as `NNNN-<slug>.md` starting from 0001 and use
-  the fixed structure: Status / Date / Context / Decision / Consequences / Evidence.
+  the fixed structure: Status / Context / Decision / Consequences / Evidence.
 - Every claim must be checked against the repository's files and cited in Evidence
   as `path/to/file:Lstart-Lend`. Anything that cannot be verified is marked
   "not verified". Never fabricate.
 - Consequences must include costs and limitations, not only benefits.
-- Date is the date the entry was recorded.
