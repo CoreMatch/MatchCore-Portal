@@ -3,9 +3,6 @@
 ## Status
 accepted
 
-## Date
-2026-08-21
-
 ## Context
 The portal addresses both Chinese- and English-speaking audiences.
 
