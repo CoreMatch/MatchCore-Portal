@@ -39,10 +39,10 @@ Observed arrangement:
   https://github.com/CoreMatch/MatchCore-Portal, while this repository's actual remote
   is https://github.com/SamuelCheston/MatchCore-Portal.git — a stale URL in the
   directory (see entry 0005).
-- The two codebases are separate and have diverged technically (SamuelPortal is Astro
+- The two codebases are separate and technically different (SamuelPortal is Astro
   ^6.0.4 with MDX and sitemap, no i18n —
   /home/lnb/SamuelPortal/package.json (field: @astrojs/mdx) — while this
-  site is Astro ^7 with Tailwind and i18n), so nothing is shared between them.
+  site is Astro ^7 with Tailwind and i18n); nothing is shared between them.
 - Because the division of labor is inferred from content rather than stated anywhere,
   the intended scope boundary is pending author confirmation.
 
@@ -59,10 +59,5 @@ Observed arrangement:
   /home/lnb/SamuelPortal/src/pages/projects.astro (field: directory-intro);
   /home/lnb/SamuelPortal/src/pages/about.astro (field: about-story);
   /home/lnb/SamuelPortal/src/projects.ts (field: A bilingual portal for the wider MatchCore ecosystem)
-- SamuelPortal commit 2f7d11fd4366e9d1e80d6bdfab32a08e37068d77 — refactor: update
-  personal portfolio site structure and content (added the MatchCore-Portal
-  description)
-- SamuelPortal commit 894faeec681255ab73a5a9db52aedb10c63151bd — Add GitHub repository
-  links to project entries (added the CoreMatch/MatchCore-Portal URL)
 - Intended division of labor between the two portals: not verified (no in-repo
   documentation; pending author confirmation)

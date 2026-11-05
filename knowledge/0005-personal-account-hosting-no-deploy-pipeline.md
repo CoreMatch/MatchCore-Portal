@@ -10,10 +10,9 @@ accepted
 Most repositories of the ecosystem this portal links to live under the CoreMatch
 GitHub organization (e.g., CoreMatch/MatchCoreArena-Client and CoreMatch/HRPAuth —
 src/site.ts (field: CoreMatch/MatchCoreArena-Client),
-src/site.ts (field: CoreMatch/HRPAuth)). This repository, created on 2026-08-21
-(commit b80199e8), is the
-exception: its remote sits under the author's personal account. How the built site
-reaches production is likewise not visible inside the repository.
+src/site.ts (field: CoreMatch/HRPAuth)). This repository is the exception: its
+remote sits under the author's personal account. How the built site reaches
+production is likewise not visible inside the repository.
 
 ## Decision
 Observed state:
@@ -54,8 +53,6 @@ Observed state:
 - src/site.ts (field: samuelcheston.com) (outbound samuelcheston.com subdomains);
   src/site.ts (field: github.com/CoreMatch) (CoreMatch organization repositories)
 - README.md (field: # MatchCore-Portal) (title-only, no hosting or deployment notes)
-- commit b80199e8088339911841080bd6133443190b5463 — Initial commit (repository
-  created under the personal account)
 - /home/lnb/SamuelPortal/src/projects.ts (field: github.com/CoreMatch/MatchCore-Portal)
   (directory entry using the CoreMatch/MatchCore-Portal URL)
 - Reason for personal-account hosting: not verified (no in-repo clue; pending author
