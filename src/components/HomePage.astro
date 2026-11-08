@@ -150,11 +150,15 @@ const accountItems = [
             data-up={t('status.up')}
             data-down={t('status.down')}
             data-unknown={t('status.unknown')}
-            data-checked={t('status.checked')}
+            data-pending={t('status.pending')}
+            data-snapshot={t('status.snapshot')}
+            data-rel-now={t('status.rel.now')}
+            data-rel-min={t('status.rel.min')}
+            data-rel-hour={t('status.rel.hour')}
             class="inline-flex items-center gap-2 rounded-md border border-arena-edge bg-arena-panel px-4 py-2 text-sm text-arena-muted"
           >
             <span data-dot class="h-2.5 w-2.5 rounded-full bg-arena-faint"></span>
-            <span data-label>{t('status.unknown')}</span>
+            <span data-label>{t('status.pending')}</span>
           </span>
           <noscript>
             <a href={siteConfig.statusUrl} target="_blank" rel="noreferrer" class="text-sm text-arena-faint underline">
@@ -349,11 +353,15 @@ const accountItems = [
             data-up={t('status.up')}
             data-down={t('status.down')}
             data-unknown={t('status.unknown')}
-            data-checked={t('status.checked')}
+            data-pending={t('status.pending')}
+            data-snapshot={t('status.snapshot')}
+            data-rel-now={t('status.rel.now')}
+            data-rel-min={t('status.rel.min')}
+            data-rel-hour={t('status.rel.hour')}
             class="mb-4 inline-flex items-center gap-2 rounded-md border border-arena-edge bg-arena-base px-3 py-1.5 text-sm text-arena-muted"
           >
             <span data-dot class="h-2.5 w-2.5 rounded-full bg-arena-faint"></span>
-            <span data-label>{t('status.unknown')}</span>
+            <span data-label>{t('status.pending')}</span>
           </span>
           <div>
             <a href={siteConfig.statusUrl} target="_blank" rel="noreferrer" class="text-sm font-semibold text-arena-accent transition-opacity hover:opacity-80">
@@ -379,33 +387,88 @@ const accountItems = [
   </div>
 </footer>
 
-<!-- Service status probe: reads /status.json written at deploy time from a real
-     probe of the arena health endpoint. The browser cannot call the endpoint
-     directly (no CORS), so the snapshot is same-origin; the check time shown
-     is the snapshot time, never a fabricated live count. -->
+<!-- Service status probe: tries a live cross-origin read of the arena health
+     endpoint (CORS-whitelisted for mcnb.dev / www.mcnb.dev), refreshing at most
+     every 60s or when the page becomes visible again. On any failure, timeout
+     (3s), or abnormal payload it falls back to /status.json — the deploy-time
+     snapshot — and labels it as such; with neither source it says unknown and
+     never claims "online". -->
 <script is:inline>
   (function () {
+    var LIVE = 'https://arena.mcnb.dev/api/status';
     var els = document.querySelectorAll('[data-arena-status]');
-    function paint(state, checkedAt) {
+    var state = 'pending';
+    var liveAt = 0;
+    var snapAt = '';
+
+    function label(el) {
+      if (state === 'live') {
+        var s = Math.floor((Date.now() - liveAt) / 1000);
+        var rel;
+        if (s < 60) rel = el.dataset.relNow;
+        else if (s < 3600) rel = el.dataset.relMin.replace('{n}', String(Math.floor(s / 60)));
+        else rel = el.dataset.relHour.replace('{n}', String(Math.floor(s / 3600)));
+        return el.dataset.up + ' · ' + rel;
+      }
+      if (state === 'live-down') return el.dataset.down;
+      if (state === 'snap-up') return el.dataset.up + ' · ' + el.dataset.snapshot + ' ' + snapAt;
+      if (state === 'snap-down') return el.dataset.down + ' · ' + el.dataset.snapshot + ' ' + snapAt;
+      if (state === 'unknown') return el.dataset.unknown;
+      return el.dataset.pending;
+    }
+
+    function paint() {
       els.forEach(function (el) {
         el.dataset.state = state;
-        var label = el.dataset[state] || el.dataset.unknown;
-        if (state === 'up' && checkedAt) {
-          label = label + ' · ' + el.dataset.checked + ' ' + checkedAt;
-        }
-        el.querySelector('[data-label]').textContent = label;
+        el.querySelector('[data-label]').textContent = label(el);
       });
     }
-    fetch('/status.json', { cache: 'no-store' })
-      .then(function (r) {
-        if (!r.ok) throw new Error('status probe missing');
-        return r.json();
-      })
-      .then(function (j) {
-        paint(j && j.ok === true ? 'up' : 'down', j && j.checked_at ? j.checked_at : '');
-      })
-      .catch(function () {
-        paint('unknown');
-      });
+
+    function snapshot() {
+      fetch('/status.json', { cache: 'no-store' })
+        .then(function (r) {
+          if (!r.ok) throw new Error('snapshot missing');
+          return r.json();
+        })
+        .then(function (j) {
+          snapAt = (j && j.checked_at) || '';
+          state = j && j.ok === true ? 'snap-up' : 'snap-down';
+          paint();
+        })
+        .catch(function () {
+          state = 'unknown';
+          paint();
+        });
+    }
+
+    function live() {
+      var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 3000) : null;
+      fetch(LIVE, { cache: 'no-store', signal: ctrl ? ctrl.signal : undefined })
+        .then(function (r) {
+          if (timer) clearTimeout(timer);
+          if (!r.ok) throw new Error('http ' + r.status);
+          return r.json();
+        })
+        .then(function (j) {
+          if (j && j.success === true) {
+            state = 'live';
+            liveAt = Date.now();
+          } else {
+            state = 'live-down';
+          }
+          paint();
+        })
+        .catch(function () {
+          if (timer) clearTimeout(timer);
+          snapshot();
+        });
+    }
+
+    live();
+    setInterval(live, 60000);
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'visible') live();
+    });
   })();
 </script>

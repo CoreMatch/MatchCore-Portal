@@ -25,12 +25,16 @@ The site publishes exactly two pages, each with a zh-cn mirror:
   the repository docs, linked), queue up and play
   (src/components/HomePage.astro::steps); account and security
   (registration, login, TOTP/WebAuthn two-factor); ecosystem entries — wiki,
-  source, and service status. The service-status chip reads /status.json,
-  written at deploy time from an actual probe of
-  https://arena.mcnb.dev/api/status, and displays the check time; the browser
-  cannot call the endpoint directly because it sends no CORS headers, and no
-  live player/match counts are shown anywhere because no such data source
-  exists. Every claim is backed by the MatchCoreArena code: only Bedwars is
+  source, and service status. The service-status chip probes
+  https://arena.mcnb.dev/api/status live from the browser (the endpoint
+  CORS-whitelists mcnb.dev and www.mcnb.dev; verified 2026-11-08: whitelisted
+  origins get an echoing access-control-allow-origin, others get none,
+  preflight 204), refreshing at most every 60s or on page visibility, and
+  shows a relative age ("just now"); on any failure, 3s timeout, or abnormal
+  payload it falls back to /status.json — a deploy-time snapshot — labeled as
+  such with its checked_at, and with neither source it says unknown and never
+  claims online. No live player/match counts are shown anywhere because no
+  such data source exists. Every claim is backed by the MatchCoreArena code: only Bedwars is
   wired up end to end (MatchCoreArena-Server `match_type` is a free-form
   string with bedwars as the only integrated mode via BedwarsRel-MCA), the
   rating engine is a server-side weighted Elo (MatchCoreArena-Server
