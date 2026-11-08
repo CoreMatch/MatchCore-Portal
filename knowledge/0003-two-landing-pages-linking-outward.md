@@ -48,7 +48,9 @@ The homepage primary CTA is labeled "Create Your Account"/"注册账号" and poi
 the account portal; the secondary CTA is the docs
 (src/i18n/pages/home.json (field: banner.ctaPrimary);
 src/components/Banner.astro (field: primaryHref)). There is no rules page, no
-download page, and no links page.
+download page, and no links page. Every footer also publishes the team contact
+email as a mailto link (src/site.ts (field: contactEmail),
+src/i18n/common.json (field: footer.contact)).
 
 ## Consequences
 - The portal is a signpost: it owns no documentation, account system, or issue
@@ -66,10 +68,10 @@ download page, and no links page.
   src/components/HomePage.astro::features.
 
 ## Evidence
-- src/site.ts:1-17 fp=c9c18dfa
+- src/site.ts:1-18 fp=14872eaa
 - src/components/HomePage.astro:15-27 fp=dac094d3;
   src/components/Banner.astro:6-17 fp=217079b5, src/components/Banner.astro:28-50 fp=a0b6d06c
-- src/pages/hrpauth.astro:6 fp=45ba16ed, src/pages/hrpauth.astro:27-29 fp=ed60bb0e,
+- src/pages/hrpauth.astro:6 fp=83604345, src/pages/hrpauth.astro:27-29 fp=ed60bb0e,
   src/pages/hrpauth.astro:48-53 fp=e4e5b29b;
   src/i18n/pages/home.json (field: banner.ctaPrimary),
   src/i18n/pages/home.json (field: features.item1.title),

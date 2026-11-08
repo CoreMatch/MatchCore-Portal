@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Banner from '../components/Banner.astro';
 import Header from '../components/Header.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
-import { siteConfigHrpauth } from '../site';
+import { siteConfig, siteConfigHrpauth } from '../site';
 import hrpauth from '../i18n/pages/hrpauth.json';
 
 const lang = getLangFromUrl(Astro.url);
@@ -164,6 +164,7 @@ const resources = [
         <a href={siteConfigHrpauth.hademoUrl} target="_blank" rel="noreferrer" class="hover:text-blue-600">{t('footer.demo')}</a>
         <a href={siteConfigHrpauth.harepoUrl} target="_blank" rel="noreferrer" class="hover:text-blue-600">{t('footer.source')}</a>
         <a href={siteConfigHrpauth.hacommunityUrl} target="_blank" rel="noreferrer" class="hover:text-blue-600">{t('footer.community')}</a>
+        <a href={`mailto:${siteConfig.contactEmail}`} class="hover:text-blue-600">{t('footer.contact')}</a>
       </div>
     </div>
   </footer>

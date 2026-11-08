@@ -13,7 +13,8 @@
     "footer.docs": "文档",
     "footer.demo": "账号门户",
     "footer.source": "源码",
-    "footer.community": "社区协作"
+    "footer.community": "社区协作",
+    "footer.contact": "联系我们"
   },
   "en": {
     "nav.home": "Home",
@@ -29,6 +30,7 @@
     "footer.docs": "Docs",
     "footer.demo": "Account Portal",
     "footer.source": "Source",
-    "footer.community": "Community"
+    "footer.community": "Community",
+    "footer.contact": "Contact"
   }
 }
