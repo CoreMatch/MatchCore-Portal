@@ -6,6 +6,7 @@ export const siteConfig = {
   demoUrl: 'https://auth.mcnb.dev/',
   communityUrl: 'https://github.com/CoreMatch/MatchCoreArena-Client/issues',
   statusUrl: 'https://arena.mcnb.dev/api/status',
+  ratingDocsUrl: 'https://wiki.mcnb.dev/dev/matchcorearena-server#评分模型-加权-elo',
   contactEmail: 'contact@mcnb.dev',
 }
 
