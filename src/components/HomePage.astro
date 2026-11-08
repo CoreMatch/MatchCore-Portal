@@ -1,6 +1,6 @@
 ---
-import Header from './Header.astro';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+import { languages } from '../i18n/ui';
 import { siteConfig } from '../site';
 
 interface Props {
@@ -10,170 +10,276 @@ interface Props {
 const { pageUi } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang, pageUi);
+const translatePath = useTranslatedPath(lang);
+
+const usageUrl = `${siteConfig.repoUrl}/blob/main/USAGE.md`;
 
 const navItems = [
-  { name: t('nav.howto'), href: '#how-it-works' },
   { name: t('nav.modes'), href: '#modes' },
+  { name: t('nav.ranking'), href: '#ranking' },
+  { name: t('nav.start'), href: '#start' },
   { name: t('nav.account'), href: '#account' },
-  { name: t('nav.eco'), href: '#ecosystem' },
-];
-
-const facts = [
-  { label: t('hero.fact1.label'), value: t('hero.fact1.value') },
-  { label: t('hero.fact2.label'), value: t('hero.fact2.value') },
-  { label: t('hero.fact3.label'), value: t('hero.fact3.value') },
-];
-
-const steps = [
-  { title: t('howto.step1.title'), desc: t('howto.step1.desc'), action: t('howto.step1.action'), href: siteConfig.demoUrl },
-  { title: t('howto.step2.title'), desc: t('howto.step2.desc'), action: t('howto.step2.action'), href: siteConfig.repoUrl },
-  { title: t('howto.step3.title'), desc: t('howto.step3.desc') },
-  { title: t('howto.step4.title'), desc: t('howto.step4.desc') },
 ];
 
 const modes = [
-  { code: '1v1', title: t('modes.m1.title'), desc: t('modes.m1.desc') },
-  { code: '2v2', title: t('modes.m2.title'), desc: t('modes.m2.desc') },
+  {
+    title: t('modes.m1.title'),
+    team: t('modes.m1.team'),
+    match: t('modes.m1.match'),
+    reward: t('modes.m1.reward'),
+    icon: 'one',
+  },
+  {
+    title: t('modes.m2.title'),
+    team: t('modes.m2.team'),
+    match: t('modes.m2.match'),
+    reward: t('modes.m2.reward'),
+    icon: 'two',
+  },
+];
+
+const rankingPoints = [
+  { title: t('ranking.why.title'), desc: t('ranking.why.desc') },
+  { title: t('ranking.how.title'), desc: t('ranking.how.desc') },
+  { title: t('ranking.where.title'), desc: t('ranking.where.desc') },
+];
+
+const steps = [
+  { title: t('start.s1.title'), desc: t('start.s1.desc') },
+  { title: t('start.s2.title'), desc: t('start.s2.desc') },
+  { title: t('start.s3.title'), desc: t('start.s3.desc') },
 ];
 
 const accountItems = [
-  { title: t('account.i1.title'), desc: t('account.i1.desc') },
-  { title: t('account.i2.title'), desc: t('account.i2.desc') },
-  { title: t('account.i3.title'), desc: t('account.i3.desc') },
-];
-
-const ecoLinks = [
-  { title: t('eco.wiki.title'), desc: t('eco.wiki.desc'), href: siteConfig.docsUrl },
-  { title: t('eco.source.title'), desc: t('eco.source.desc'), href: siteConfig.repoUrl },
-  { title: t('eco.status.title'), desc: t('eco.status.desc'), href: siteConfig.statusUrl },
+  { title: t('account.a1.title'), desc: t('account.a1.desc') },
+  { title: t('account.a2.title'), desc: t('account.a2.desc') },
+  { title: t('account.a3.title'), desc: t('account.a3.desc') },
 ];
 ---
 
-<Header navItems={navItems} />
+<!-- Top bar -->
+<header class="sticky top-0 z-50 w-full border-b border-arena-edge bg-arena-base/95 backdrop-blur-md">
+  <div class="container mx-auto flex h-16 items-center justify-between px-4">
+    <a href={translatePath('/')} class="flex items-center gap-2">
+      <div class="flex h-8 w-8 items-center justify-center rounded-md bg-arena-accent font-bold text-white">M</div>
+      <span class="text-xl font-bold tracking-tight text-arena-ink">{siteConfig.projectName}</span>
+    </a>
+
+    <nav class="hidden items-center gap-8 lg:flex">
+      {navItems.map((item) => (
+        <a href={item.href} class="text-sm font-medium text-arena-muted transition-colors hover:text-arena-ink">
+          {item.name}
+        </a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-1 border-r border-arena-edge pr-3">
+        {Object.entries(languages).map(([l]) => (
+          <a
+            href={translatePath(Astro.url.pathname.replace(`/${lang}`, '') || '/', l)}
+            class={`rounded-md px-2 py-1 text-xs transition-colors ${lang === l ? 'bg-arena-raised font-bold text-arena-ink' : 'text-arena-faint hover:text-arena-ink'}`}
+          >
+            {l === 'zh-cn' ? '中' : 'EN'}
+          </a>
+        ))}
+      </div>
+      <a
+        href={siteConfig.demoUrl}
+        target="_blank"
+        rel="noreferrer"
+        class="hidden rounded-md border border-arena-edge-strong px-4 py-2 text-sm font-medium text-arena-ink transition-colors hover:border-arena-faint sm:block"
+      >
+        {t('nav.login')}
+      </a>
+      <a
+        href={siteConfig.demoUrl}
+        target="_blank"
+        rel="noreferrer"
+        class="rounded-md bg-arena-accent px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+      >
+        {t('nav.signup')}
+      </a>
+    </div>
+  </div>
+</header>
 
 <main>
   <!-- Hero -->
-  <section class="border-b border-arena-edge bg-arena-base py-24">
-    <div class="container mx-auto px-4">
+  <section class="border-b border-arena-edge">
+    <div class="container mx-auto px-4 py-24 md:py-32">
       <div class="mx-auto max-w-4xl text-center">
-        <h1 class="mb-6 text-4xl font-extrabold leading-tight tracking-tight text-arena-ink md:text-[52px]">
+        <h1 class="mb-6 text-5xl font-extrabold leading-[1.05] tracking-tight text-arena-ink md:text-7xl">
           {t('hero.title')}
         </h1>
         <p class="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-arena-muted md:text-xl">
           {t('hero.subtitle')}
         </p>
-
-        <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <div class="flex flex-col items-center gap-6">
           <a
             href={siteConfig.demoUrl}
             target="_blank"
             rel="noreferrer"
-            class="w-full rounded-md bg-arena-accent px-8 py-4 text-center text-base font-semibold text-white transition-opacity hover:opacity-90 sm:w-auto"
+            class="w-full rounded-md bg-arena-accent px-10 py-4 text-base font-semibold text-white transition-opacity hover:opacity-90 sm:w-auto"
           >
-            {t('hero.ctaPrimary')}
+            {t('hero.cta')}
           </a>
-          <a
-            href="#how-it-works"
-            class="w-full rounded-md border border-arena-edge-strong bg-arena-panel px-8 py-4 text-center text-base font-semibold text-arena-ink transition-colors hover:border-arena-faint sm:w-auto"
+          <span
+            data-arena-status
+            data-state="pending"
+            data-up={t('status.up')}
+            data-down={t('status.down')}
+            data-unknown={t('status.unknown')}
+            data-checked={t('status.checked')}
+            class="inline-flex items-center gap-2 rounded-md border border-arena-edge bg-arena-panel px-4 py-2 text-sm text-arena-muted"
           >
-            {t('hero.ctaSecondary')}
-          </a>
+            <span data-dot class="h-2.5 w-2.5 rounded-full bg-arena-faint"></span>
+            <span data-label>{t('status.unknown')}</span>
+          </span>
+          <noscript>
+            <a href={siteConfig.statusUrl} target="_blank" rel="noreferrer" class="text-sm text-arena-faint underline">
+              {t('status.noscript')}
+            </a>
+          </noscript>
         </div>
       </div>
-
-      <div class="mx-auto mt-14 grid max-w-4xl gap-4 md:grid-cols-3">
-        {facts.map((fact) => (
-          <div class="rounded-lg border border-arena-edge bg-arena-panel p-5 text-left">
-            <p class="text-sm text-arena-faint">{fact.label}</p>
-            <p class="mt-2 text-base font-semibold text-arena-ink">{fact.value}</p>
-          </div>
-        ))}
-      </div>
     </div>
   </section>
 
-  <!-- How it works -->
-  <section id="how-it-works" class="border-b border-arena-edge bg-arena-base py-20">
-    <div class="container mx-auto px-4">
-      <div class="mx-auto mb-12 max-w-3xl text-center">
-        <h2 class="mb-4 text-3xl font-bold text-arena-ink">{t('howto.title')}</h2>
-        <p class="text-arena-muted">{t('howto.desc')}</p>
-      </div>
-
-      <div class="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
-        {steps.map((step, i) => (
-          <div class="rounded-lg border border-arena-edge bg-arena-panel p-8">
-            <div class="mb-4 flex items-center gap-3">
-              <span class="flex h-10 w-10 items-center justify-center rounded-md border border-arena-edge-strong bg-arena-raised font-mono text-lg font-bold text-arena-accent">{i + 1}</span>
-              <h3 class="text-xl font-bold text-arena-ink">{step.title}</h3>
+  <!-- Modes -->
+  <section id="modes" class="border-b border-arena-edge">
+    <div class="container mx-auto px-4 py-20">
+      <h2 class="mb-10 text-3xl font-bold text-arena-ink md:text-4xl">{t('modes.title')}</h2>
+      <div class="grid gap-6 lg:grid-cols-2">
+        {modes.map((mode) => (
+          <div class="group rounded-lg border border-arena-edge bg-arena-panel p-8 transition-colors hover:border-arena-edge-strong">
+            <div class="mb-6 flex items-center gap-4">
+              {mode.icon === 'one' ? (
+                <svg class="h-12 w-12 shrink-0" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                  <rect x="1" y="1" width="46" height="46" rx="8" stroke="var(--color-arena-edge-strong)" stroke-width="2" />
+                  <path d="M14 16 L22 24 L14 32" stroke="var(--color-arena-accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M34 16 L26 24 L34 32" stroke="var(--color-arena-ink)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              ) : (
+                <svg class="h-12 w-12 shrink-0" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                  <rect x="1" y="1" width="46" height="46" rx="8" stroke="var(--color-arena-edge-strong)" stroke-width="2" />
+                  <circle cx="17" cy="18" r="4" fill="var(--color-arena-accent)" />
+                  <circle cx="17" cy="31" r="4" fill="var(--color-arena-accent)" />
+                  <circle cx="31" cy="18" r="4" fill="var(--color-arena-ink)" />
+                  <circle cx="31" cy="31" r="4" fill="var(--color-arena-ink)" />
+                </svg>
+              )}
+              <h3 class="text-2xl font-bold text-arena-ink">{mode.title}</h3>
             </div>
-            <p class="leading-relaxed text-arena-muted">{step.desc}</p>
-            {step.href && (
-              <a
-                href={step.href}
-                target="_blank"
-                rel="noreferrer"
-                class="mt-4 inline-block font-semibold text-arena-accent transition-opacity hover:opacity-80"
-              >
-                {step.action} →
-              </a>
-            )}
+            <dl class="space-y-4">
+              <div>
+                <dt class="mb-1 text-xs font-semibold uppercase tracking-[0.15em] text-arena-faint">{t('modes.label.team')}</dt>
+                <dd class="leading-relaxed text-arena-muted">{mode.team}</dd>
+              </div>
+              <div>
+                <dt class="mb-1 text-xs font-semibold uppercase tracking-[0.15em] text-arena-faint">{t('modes.label.match')}</dt>
+                <dd class="leading-relaxed text-arena-muted">{mode.match}</dd>
+              </div>
+              <div>
+                <dt class="mb-1 text-xs font-semibold uppercase tracking-[0.15em] text-arena-faint">{t('modes.label.reward')}</dt>
+                <dd class="font-medium text-arena-ink">{mode.reward}</dd>
+              </div>
+            </dl>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Modes & rating -->
-  <section id="modes" class="border-b border-arena-edge bg-arena-base py-20">
-    <div class="container mx-auto px-4">
-      <div class="mx-auto mb-12 max-w-3xl text-center">
-        <h2 class="mb-4 text-3xl font-bold text-arena-ink">{t('modes.title')}</h2>
-        <p class="text-arena-muted">{t('modes.desc')}</p>
-      </div>
-
-      <div class="mx-auto grid max-w-5xl gap-6 lg:grid-cols-2">
-        <div class="grid gap-6">
-          {modes.map((mode) => (
-            <div class="flex items-start gap-5 rounded-lg border border-arena-edge bg-arena-panel p-8">
-              <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-md border border-arena-edge-strong bg-arena-raised font-mono text-lg font-bold text-arena-ink">{mode.code}</span>
-              <div>
-                <h3 class="mb-2 text-xl font-bold text-arena-ink">{mode.title}</h3>
-                <p class="leading-relaxed text-arena-muted">{mode.desc}</p>
-              </div>
+  <!-- Ranking -->
+  <section id="ranking" class="border-b border-arena-edge bg-arena-panel/40">
+    <div class="container mx-auto px-4 py-20">
+      <div class="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+        <div>
+          <h2 class="mb-8 text-3xl font-bold text-arena-ink md:text-4xl">{t('ranking.title')}</h2>
+          <svg class="hidden w-full max-w-sm lg:block" viewBox="0 0 320 180" fill="none" aria-hidden="true">
+            <line x1="8" y1="172" x2="312" y2="172" stroke="var(--color-arena-edge-strong)" stroke-width="2" />
+            <rect x="24" y="132" width="44" height="40" fill="var(--color-arena-bronze)" />
+            <rect x="84" y="104" width="44" height="68" fill="var(--color-arena-silver)" />
+            <rect x="144" y="68" width="44" height="104" fill="var(--color-arena-gold)" />
+            <rect x="204" y="40" width="44" height="132" fill="var(--color-arena-accent)" />
+            <path d="M262 54 L276 40 L290 54 M276 40 L276 96" stroke="var(--color-arena-ink)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+        <div class="space-y-8">
+          {rankingPoints.map((point, i) => (
+            <div class="rounded-lg border border-arena-edge bg-arena-base p-6">
+              <h3 class="mb-2 flex items-center gap-3 text-xl font-bold text-arena-ink">
+                <span class="font-mono text-base text-arena-accent">{String(i + 1).padStart(2, '0')}</span>
+                {point.title}
+              </h3>
+              <p class="leading-relaxed text-arena-muted">{point.desc}</p>
             </div>
           ))}
-          <div class="rounded-lg border border-arena-edge bg-arena-panel p-8">
-            <p class="leading-relaxed text-arena-muted">{t('modes.rank.note')}</p>
+          <a
+            href={siteConfig.ratingDocsUrl}
+            target="_blank"
+            rel="noreferrer"
+            class="inline-block font-semibold text-arena-accent transition-opacity hover:opacity-80"
+          >
+            {t('rating.wiki')} →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Get started -->
+  <section id="start" class="border-b border-arena-edge">
+    <div class="container mx-auto px-4 py-20">
+      <h2 class="mb-10 text-3xl font-bold text-arena-ink md:text-4xl">{t('start.title')}</h2>
+      <div class="grid gap-6 md:grid-cols-3">
+        <div class="flex flex-col rounded-lg border border-arena-edge bg-arena-panel p-8">
+          <span class="mb-4 font-mono text-4xl font-bold text-arena-accent">1</span>
+          <h3 class="mb-2 text-xl font-bold text-arena-ink">{steps[0].title}</h3>
+          <p class="mb-6 flex-1 leading-relaxed text-arena-muted">{steps[0].desc}</p>
+          <a href={siteConfig.demoUrl} target="_blank" rel="noreferrer" class="font-semibold text-arena-accent transition-opacity hover:opacity-80">
+            {t('start.s1.action')} →
+          </a>
+        </div>
+        <div class="flex flex-col rounded-lg border border-arena-edge bg-arena-panel p-8">
+          <span class="mb-4 font-mono text-4xl font-bold text-arena-accent">2</span>
+          <h3 class="mb-2 text-xl font-bold text-arena-ink">{steps[1].title}</h3>
+          <p class="mb-6 flex-1 leading-relaxed text-arena-muted">{steps[1].desc}</p>
+          <div class="flex flex-wrap gap-x-5 gap-y-2">
+            <a href={siteConfig.repoUrl} target="_blank" rel="noreferrer" class="font-semibold text-arena-accent transition-opacity hover:opacity-80">
+              {t('start.s2.action1')} →
+            </a>
+            <a href={usageUrl} target="_blank" rel="noreferrer" class="font-semibold text-arena-accent transition-opacity hover:opacity-80">
+              {t('start.s2.action2')} →
+            </a>
           </div>
         </div>
-
-        <div class="rounded-lg border border-arena-edge bg-arena-panel p-8">
-          <h3 class="mb-4 text-xl font-bold text-arena-ink">{t('modes.elo.title')}</h3>
-          <p class="leading-relaxed text-arena-muted">{t('modes.elo.desc')}</p>
+        <div class="flex flex-col rounded-lg border border-arena-edge bg-arena-panel p-8">
+          <span class="mb-4 font-mono text-4xl font-bold text-arena-accent">3</span>
+          <h3 class="mb-2 text-xl font-bold text-arena-ink">{steps[2].title}</h3>
+          <p class="leading-relaxed text-arena-muted">{steps[2].desc}</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Account & security -->
-  <section id="account" class="border-b border-arena-edge bg-arena-base py-20">
-    <div class="container mx-auto px-4">
-      <div class="mx-auto mb-12 max-w-3xl text-center">
-        <h2 class="mb-4 text-3xl font-bold text-arena-ink">{t('account.title')}</h2>
+  <section id="account" class="border-b border-arena-edge bg-arena-panel/40">
+    <div class="container mx-auto px-4 py-20">
+      <div class="mx-auto mb-10 max-w-3xl text-center">
+        <h2 class="mb-3 text-3xl font-bold text-arena-ink md:text-4xl">{t('account.title')}</h2>
         <p class="text-arena-muted">{t('account.desc')}</p>
       </div>
-
       <div class="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">
         {accountItems.map((item) => (
-          <div class="rounded-lg border border-arena-edge bg-arena-panel p-8">
+          <div class="rounded-lg border border-arena-edge bg-arena-base p-8">
             <h3 class="mb-3 text-xl font-bold text-arena-ink">{item.title}</h3>
             <p class="leading-relaxed text-arena-muted">{item.desc}</p>
           </div>
         ))}
       </div>
-
-      <div class="mx-auto mt-10 max-w-5xl text-center">
+      <div class="mt-10 text-center">
         <a
           href={siteConfig.demoUrl}
           target="_blank"
@@ -187,36 +293,59 @@ const ecoLinks = [
   </section>
 
   <!-- Ecosystem -->
-  <section id="ecosystem" class="bg-arena-base py-20">
-    <div class="container mx-auto px-4">
-      <div class="mx-auto mb-12 max-w-3xl text-center">
-        <h2 class="mb-4 text-3xl font-bold text-arena-ink">{t('eco.title')}</h2>
-      </div>
-
-      <div class="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">
-        {ecoLinks.map((link) => (
-          <a
-            href={link.href}
-            target="_blank"
-            rel="noreferrer"
-            class="group rounded-lg border border-arena-edge bg-arena-panel p-8 transition-colors hover:border-arena-edge-strong"
+  <section id="ecosystem" class="border-b border-arena-edge">
+    <div class="container mx-auto px-4 py-20">
+      <h2 class="mb-10 text-3xl font-bold text-arena-ink md:text-4xl">{t('eco.title')}</h2>
+      <div class="grid gap-6 md:grid-cols-3">
+        <a
+          href={siteConfig.docsUrl}
+          target="_blank"
+          rel="noreferrer"
+          class="group rounded-lg border border-arena-edge bg-arena-panel p-8 transition-colors hover:border-arena-edge-strong"
+        >
+          <h3 class="mb-3 text-xl font-bold text-arena-ink">{t('eco.wiki.title')}</h3>
+          <p class="mb-6 leading-relaxed text-arena-muted">{t('eco.wiki.desc')}</p>
+          <span class="font-semibold text-arena-accent">{t('resources.action')} →</span>
+        </a>
+        <a
+          href={siteConfig.repoUrl}
+          target="_blank"
+          rel="noreferrer"
+          class="group rounded-lg border border-arena-edge bg-arena-panel p-8 transition-colors hover:border-arena-edge-strong"
+        >
+          <h3 class="mb-3 text-xl font-bold text-arena-ink">{t('eco.source.title')}</h3>
+          <p class="mb-6 leading-relaxed text-arena-muted">{t('eco.source.desc')}</p>
+          <span class="font-semibold text-arena-accent">{t('resources.action')} →</span>
+        </a>
+        <div class="rounded-lg border border-arena-edge bg-arena-panel p-8">
+          <h3 class="mb-3 text-xl font-bold text-arena-ink">{t('eco.status.title')}</h3>
+          <p class="mb-6 leading-relaxed text-arena-muted">{t('eco.status.desc')}</p>
+          <span
+            data-arena-status
+            data-state="pending"
+            data-up={t('status.up')}
+            data-down={t('status.down')}
+            data-unknown={t('status.unknown')}
+            data-checked={t('status.checked')}
+            class="mb-4 inline-flex items-center gap-2 rounded-md border border-arena-edge bg-arena-base px-3 py-1.5 text-sm text-arena-muted"
           >
-            <h3 class="mb-3 text-xl font-bold text-arena-ink">{link.title}</h3>
-            <p class="mb-6 leading-relaxed text-arena-muted">{link.desc}</p>
-            <span class="font-semibold text-arena-accent">
-              {t('resources.action')} →
-            </span>
-          </a>
-        ))}
+            <span data-dot class="h-2.5 w-2.5 rounded-full bg-arena-faint"></span>
+            <span data-label>{t('status.unknown')}</span>
+          </span>
+          <div>
+            <a href={siteConfig.statusUrl} target="_blank" rel="noreferrer" class="text-sm font-semibold text-arena-accent transition-opacity hover:opacity-80">
+              {t('eco.status.raw')} →
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 </main>
 
-<footer class="border-t border-arena-edge bg-arena-base py-12">
+<footer class="bg-arena-base py-12">
   <div class="container mx-auto flex flex-col gap-6 px-4 md:flex-row md:items-center md:justify-between">
     <p class="text-sm text-arena-faint">{t('footer.rights')}</p>
-
     <div class="flex flex-wrap items-center gap-5 text-sm font-medium text-arena-muted">
       <a href={siteConfig.docsUrl} target="_blank" rel="noreferrer" class="hover:text-arena-ink">{t('footer.docs')}</a>
       <a href={siteConfig.demoUrl} target="_blank" rel="noreferrer" class="hover:text-arena-ink">{t('footer.demo')}</a>
@@ -226,3 +355,34 @@ const ecoLinks = [
     </div>
   </div>
 </footer>
+
+<!-- Service status probe: reads /status.json written at deploy time from a real
+     probe of the arena health endpoint. The browser cannot call the endpoint
+     directly (no CORS), so the snapshot is same-origin; the check time shown
+     is the snapshot time, never a fabricated live count. -->
+<script is:inline>
+  (function () {
+    var els = document.querySelectorAll('[data-arena-status]');
+    function paint(state, checkedAt) {
+      els.forEach(function (el) {
+        el.dataset.state = state;
+        var label = el.dataset[state] || el.dataset.unknown;
+        if (state === 'up' && checkedAt) {
+          label = label + ' · ' + el.dataset.checked + ' ' + checkedAt;
+        }
+        el.querySelector('[data-label]').textContent = label;
+      });
+    }
+    fetch('/status.json', { cache: 'no-store' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('status probe missing');
+        return r.json();
+      })
+      .then(function (j) {
+        paint(j && j.ok === true ? 'up' : 'down', j && j.checked_at ? j.checked_at : '');
+      })
+      .catch(function () {
+        paint('unknown');
+      });
+  })();
+</script>

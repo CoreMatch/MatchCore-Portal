@@ -25,3 +25,15 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* Service status probe chip: colors follow the real probe result. */
+[data-arena-status][data-state="up"] [data-dot] {
+  background: var(--color-arena-ok);
+}
+[data-arena-status][data-state="down"] [data-dot] {
+  background: var(--color-arena-accent);
+}
+[data-arena-status][data-state="unknown"] [data-dot],
+[data-arena-status][data-state="pending"] [data-dot] {
+  background: var(--color-arena-faint);
+}
