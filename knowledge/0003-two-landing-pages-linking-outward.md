@@ -73,6 +73,14 @@ Both pages use the arena design tokens defined in src/styles/global.css
 (near-black base #0a0c10, single accent #e94560, hard 1px borders, no
 shadows/glass/gradients), mirroring the ecosystem's shared design system
 (CoreMatch/ha-ui) [xref].
+The home page carries five author-provided voxel-style illustrations with
+their generator watermarks cropped off, served locally (never hotlinked) as
+WebP from public/images/ in 1x/2x variants plus a portrait hero crop for
+small screens; the hero loads eagerly with explicit width/height, everything
+below the fold loads lazily, and the shared OG image is emitted as an
+absolute URL through the `site` config
+(src/components/HomePage.astro (field: hero-portrait.webp),
+src/layouts/Layout.astro (field: og:image)).
 
 ## Consequences
 - The portal is a signpost: it owns no documentation, account system, or issue
@@ -109,7 +117,9 @@ shadows/glass/gradients), mirroring the ecosystem's shared design system
   src/components/Banner.astro (field: projectName),
   src/components/Banner.astro (field: primaryHref);
   src/styles/global.css (field: --color-arena-accent),
-  src/styles/global.css (field: data-arena-status)
+  src/styles/global.css (field: data-arena-status);
+  public/images (hero-wide-1x/2x, hero-portrait, mode-1v1-1x/2x,
+  mode-2v2-1x/2x, rank-bg-1x/2x, og — WebP, watermarks cropped)
 - src/pages/hrpauth.astro:6 fp=83604345, src/pages/hrpauth.astro:27-29 fp=ed60bb0e,
   src/pages/hrpauth.astro:48-53 fp=e4e5b29b;
   src/i18n/pages/home.json (field: hero.cta),

@@ -39,7 +39,8 @@ Build the portal as a fully static Astro site:
 - package.json (field: matchcore-portal) (name matchcore-portal; engines node
   >=22.12.0; scripts dev/build/preview; dependencies astro ^7.2.4, tailwindcss
   ^4.3.3, @tailwindcss/vite ^4.3.3; no adapter dependency)
-- astro.config.mjs::defineConfig (tailwindcss Vite plugin; i18n block; nothing else)
+- astro.config.mjs::defineConfig (tailwindcss Vite plugin; i18n block; `site`
+  for absolute OG URLs; no adapter)
 - tsconfig.json (field: astro/tsconfigs/strict) ("extends": "astro/tsconfigs/strict")
 - src/styles/global.css (field: @import "tailwindcss") (`@import "tailwindcss";`)
 - AGENTS.md:1-22 fp=258e7155 (development and documentation guidance); CLAUDE.md is a symlink to

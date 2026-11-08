@@ -19,6 +19,11 @@ const lang = getLangFromUrl(Astro.url);
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={new URL('/images/og.webp', Astro.site)} />
+		<meta name="twitter:card" content="summary_large_image" />
 		<title>{title}</title>
 	</head>
 	<body class="bg-arena-base text-arena-ink font-sans antialiased selection:bg-arena-accent/40 selection:text-white">

@@ -15,8 +15,9 @@ Observed state:
 - The repository is hosted at github.com/CoreMatch/MatchCore-Portal (the former
   SamuelCheston/MatchCore-Portal URL redirects there). The tracked tree
   contains a build-only CI (.github/workflows/ci.yml (field: npm run build));
-  there is no in-repo deployment pipeline and no `site` property in
-  astro.config.mjs.
+  there is no in-repo deployment pipeline. astro.config.mjs carries
+  `site: 'https://mcnb.dev'` solely so OG meta tags can emit absolute URLs
+  (astro.config.mjs (field: site)).
 - The portal is published at https://mcnb.dev/ from the production server
   (aaPanel-managed nginx). The vhost for `server_name mcnb.dev` is purely
   static with root /www/wwwroot/mcnb.dev — no proxy_pass, no rewrite rules
@@ -46,7 +47,8 @@ Observed state:
 
 ## Evidence
 - .github/workflows/ci.yml (build job only); astro.config.mjs::defineConfig
-  (no `site`, no adapter); `git ls-files` contains no deploy workflow or CNAME
+  (`site` set to https://mcnb.dev for OG URLs; no adapter); `git ls-files`
+  contains no deploy workflow or CNAME
   file
 - Probes on 2026-11-08: https://mcnb.dev/ -> 200, title "MatchCore Arena |
   Bedwars matchmaking and rankings for Minecraft"; /zh-cn/ -> 200 zh title;
