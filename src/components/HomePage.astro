@@ -27,14 +27,18 @@ const modes = [
     team: t('modes.m1.team'),
     match: t('modes.m1.match'),
     reward: t('modes.m1.reward'),
-    icon: 'one',
+    alt: t('img.m1.alt'),
+    img1x: '/images/mode-1v1-1x.webp',
+    img2x: '/images/mode-1v1-2x.webp',
   },
   {
     title: t('modes.m2.title'),
     team: t('modes.m2.team'),
     match: t('modes.m2.match'),
     reward: t('modes.m2.reward'),
-    icon: 'two',
+    alt: t('img.m2.alt'),
+    img1x: '/images/mode-2v2-1x.webp',
+    img2x: '/images/mode-2v2-2x.webp',
   },
 ];
 
@@ -106,8 +110,24 @@ const accountItems = [
 
 <main>
   <!-- Hero -->
-  <section class="border-b border-arena-edge">
-    <div class="container mx-auto px-4 py-24 md:py-32">
+  <section class="relative overflow-hidden border-b border-arena-edge">
+    <picture>
+      <source media="(max-width: 767px)" srcset="/images/hero-portrait.webp" type="image/webp" />
+      <img
+        src="/images/hero-wide-1x.webp"
+        srcset="/images/hero-wide-1x.webp 1446w, /images/hero-wide-2x.webp 2892w"
+        sizes="100vw"
+        width="2892"
+        height="1240"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        alt={t('img.hero.alt')}
+        class="absolute inset-0 h-full w-full object-cover"
+      />
+    </picture>
+    <div class="absolute inset-0 bg-gradient-to-t from-arena-base via-arena-base/75 to-arena-base/40"></div>
+    <div class="container relative mx-auto px-4 py-24 md:py-32">
       <div class="mx-auto max-w-4xl text-center">
         <h1 class="mb-6 text-5xl font-extrabold leading-[1.05] tracking-tight text-arena-ink md:text-7xl">
           {t('hero.title')}
@@ -152,26 +172,23 @@ const accountItems = [
       <h2 class="mb-10 text-3xl font-bold text-arena-ink md:text-4xl">{t('modes.title')}</h2>
       <div class="grid gap-6 lg:grid-cols-2">
         {modes.map((mode) => (
-          <div class="group rounded-lg border border-arena-edge bg-arena-panel p-8 transition-colors hover:border-arena-edge-strong">
-            <div class="mb-6 flex items-center gap-4">
-              {mode.icon === 'one' ? (
-                <svg class="h-12 w-12 shrink-0" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-                  <rect x="1" y="1" width="46" height="46" rx="8" stroke="var(--color-arena-edge-strong)" stroke-width="2" />
-                  <path d="M14 16 L22 24 L14 32" stroke="var(--color-arena-accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M34 16 L26 24 L34 32" stroke="var(--color-arena-ink)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              ) : (
-                <svg class="h-12 w-12 shrink-0" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-                  <rect x="1" y="1" width="46" height="46" rx="8" stroke="var(--color-arena-edge-strong)" stroke-width="2" />
-                  <circle cx="17" cy="18" r="4" fill="var(--color-arena-accent)" />
-                  <circle cx="17" cy="31" r="4" fill="var(--color-arena-accent)" />
-                  <circle cx="31" cy="18" r="4" fill="var(--color-arena-ink)" />
-                  <circle cx="31" cy="31" r="4" fill="var(--color-arena-ink)" />
-                </svg>
-              )}
-              <h3 class="text-2xl font-bold text-arena-ink">{mode.title}</h3>
+          <div class="group overflow-hidden rounded-lg border border-arena-edge bg-arena-panel transition-colors hover:border-arena-edge-strong">
+            <div class="aspect-[16/10] overflow-hidden border-b border-arena-edge">
+              <img
+                src={mode.img1x}
+                srcset={`${mode.img1x} 1192w, ${mode.img2x} 2384w`}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                width="2384"
+                height="1490"
+                loading="lazy"
+                decoding="async"
+                alt={mode.alt}
+                class="h-full w-full object-cover"
+              />
             </div>
-            <dl class="space-y-4">
+            <div class="p-8">
+              <h3 class="mb-6 text-2xl font-bold text-arena-ink">{mode.title}</h3>
+              <dl class="space-y-4">
               <div>
                 <dt class="mb-1 text-xs font-semibold uppercase tracking-[0.15em] text-arena-faint">{t('modes.label.team')}</dt>
                 <dd class="leading-relaxed text-arena-muted">{mode.team}</dd>
@@ -184,7 +201,8 @@ const accountItems = [
                 <dt class="mb-1 text-xs font-semibold uppercase tracking-[0.15em] text-arena-faint">{t('modes.label.reward')}</dt>
                 <dd class="font-medium text-arena-ink">{mode.reward}</dd>
               </div>
-            </dl>
+              </dl>
+            </div>
           </div>
         ))}
       </div>
@@ -192,19 +210,24 @@ const accountItems = [
   </section>
 
   <!-- Ranking -->
-  <section id="ranking" class="border-b border-arena-edge bg-arena-panel/40">
-    <div class="container mx-auto px-4 py-20">
+  <section id="ranking" class="relative overflow-hidden border-b border-arena-edge">
+    <img
+      src="/images/rank-bg-1x.webp"
+      srcset="/images/rank-bg-1x.webp 1424w, /images/rank-bg-2x.webp 2848w"
+      sizes="100vw"
+      width="2848"
+      height="949"
+      loading="lazy"
+      decoding="async"
+      alt={t('img.rank.alt')}
+      class="absolute inset-0 h-full w-full object-cover"
+    />
+    <div class="absolute inset-0 bg-arena-base/85"></div>
+    <div class="container relative mx-auto px-4 py-20">
       <div class="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
           <h2 class="mb-8 text-3xl font-bold text-arena-ink md:text-4xl">{t('ranking.title')}</h2>
-          <svg class="hidden w-full max-w-sm lg:block" viewBox="0 0 320 180" fill="none" aria-hidden="true">
-            <line x1="8" y1="172" x2="312" y2="172" stroke="var(--color-arena-edge-strong)" stroke-width="2" />
-            <rect x="24" y="132" width="44" height="40" fill="var(--color-arena-bronze)" />
-            <rect x="84" y="104" width="44" height="68" fill="var(--color-arena-silver)" />
-            <rect x="144" y="68" width="44" height="104" fill="var(--color-arena-gold)" />
-            <rect x="204" y="40" width="44" height="132" fill="var(--color-arena-accent)" />
-            <path d="M262 54 L276 40 L290 54 M276 40 L276 96" stroke="var(--color-arena-ink)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
+          <p class="max-w-md leading-relaxed text-arena-muted">{t('ranking.lede')}</p>
         </div>
         <div class="space-y-8">
           {rankingPoints.map((point, i) => (
