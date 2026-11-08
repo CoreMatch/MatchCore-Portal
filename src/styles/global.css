@@ -1,1 +1,27 @@
 @import "tailwindcss";
+
+/*
+ * Arena design tokens, mirroring the ecosystem's shared design system
+ * (CoreMatch/ha-ui): near-black cool base, one accent color, hard 1px
+ * borders, no shadows, no glass, no gradients, near-zero motion.
+ */
+@theme {
+  --color-arena-base: #0a0c10;
+  --color-arena-panel: #10141a;
+  --color-arena-raised: #171d26;
+  --color-arena-edge: #232b37;
+  --color-arena-edge-strong: #344152;
+  --color-arena-ink: #e9edf3;
+  --color-arena-muted: #96a1b3;
+  --color-arena-faint: #5c6879;
+  --color-arena-accent: #e94560;
+  --color-arena-ok: #4caf50;
+  --color-arena-warn: #f59e0b;
+  --color-arena-gold: #ffd700;
+  --color-arena-silver: #c0c0c0;
+  --color-arena-bronze: #cd7f32;
+}
+
+html {
+  scroll-behavior: smooth;
+}
