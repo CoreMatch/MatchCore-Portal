@@ -35,10 +35,12 @@ All off-site destinations are centralized in src/site.ts and open in new tabs.
 MatchCore Arena page: docs -> https://wiki.mcnb.dev/, account portal ->
 https://auth.mcnb.dev/, source and community -> CoreMatch/MatchCoreArena-Client
 and its issue tracker. HRPAuth page: docs ->
-https://wiki.mcnb.dev/projects/hrpauth/, account portal ->
+https://wiki.mcnb.dev/HRPAuth/, account portal ->
 https://auth.mcnb.dev/, source and community -> CoreMatch/HRPAuth and its issue
-tracker (src/site.ts::siteConfig, src/site.ts::siteConfigHrpauth). The mcnb.dev
-domains are the code-authoritative values: SamuelWiki declares
+tracker (src/site.ts::siteConfig, src/site.ts::siteConfigHrpauth). The HRPAuth
+docs link follows the wiki's current /<project>/ layout; the former
+/projects/hrpauth/ path answers 404 after the wiki migration.
+The mcnb.dev domains are the code-authoritative values: SamuelWiki declares
 `hostname: 'https://wiki.mcnb.dev'` (SamuelWiki docs/.vitepress/config.mts) [xref], and
 HRPAuth defaults `frontend.url` to `https://auth.mcnb.dev/` with WebAuthn
 `rp_id` `auth.mcnb.dev` (HRPAuth controllers/startup_controller.go::buildDefaultConfig) [xref].
@@ -64,7 +66,7 @@ download page, and no links page.
   src/components/HomePage.astro::features.
 
 ## Evidence
-- src/site.ts:1-17 fp=a9bfb5fc
+- src/site.ts:1-17 fp=c9c18dfa
 - src/components/HomePage.astro:15-27 fp=dac094d3;
   src/components/Banner.astro:6-17 fp=217079b5, src/components/Banner.astro:28-50 fp=a0b6d06c
 - src/pages/hrpauth.astro:6 fp=45ba16ed, src/pages/hrpauth.astro:27-29 fp=ed60bb0e,

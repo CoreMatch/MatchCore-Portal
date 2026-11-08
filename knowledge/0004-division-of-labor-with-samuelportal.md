@@ -15,7 +15,7 @@ Observed arrangement:
 
 - MatchCore-Portal is product-facing: bilingual (en/zh-cn) landing pages for MatchCore
   Arena and HRPAuth that send visitors outward to wiki.mcnb.dev,
-  auth.mcnb.dev, and CoreMatch repositories (src/site.ts:1-17 fp=a9bfb5fc).
+  auth.mcnb.dev, and CoreMatch repositories (src/site.ts:1-17 fp=c9c18dfa).
 - SamuelPortal is the author's personal portfolio at http://samuelcheston.com/
   (/home/lnb/SamuelPortal/astro.config.mjs (field: samuelcheston.com)): English-only,
   with a homepage, a /projects directory, and an /about page (SamuelPortal
@@ -44,7 +44,7 @@ Observed arrangement:
   the intended scope boundary is pending author confirmation.
 
 ## Evidence
-- This repository: src/site.ts:1-17 fp=a9bfb5fc; URL scan of src/ shows only
+- This repository: src/site.ts:1-17 fp=c9c18dfa; URL scan of src/ shows only
   wiki.mcnb.dev, auth.mcnb.dev, and github.com/CoreMatch/*
 - SamuelPortal (read-only reference):
   /home/lnb/SamuelPortal/astro.config.mjs (field: samuelcheston.com) (site
