@@ -22,7 +22,7 @@ Build the portal as a fully static Astro site:
   utility classes plus one global import
   (src/styles/global.css (field: @import "tailwindcss")).
 - AI-agent development guidance ships in-repo as AGENTS.md, with CLAUDE.md as a
-  symlink to it (AGENTS.md:1-22).
+  symlink to it (AGENTS.md:1-22 fp=258e7155).
 
 ## Consequences
 - Adding or changing copy requires editing components/JSON and rebuilding; there is no
@@ -42,5 +42,5 @@ Build the portal as a fully static Astro site:
 - astro.config.mjs::defineConfig (tailwindcss Vite plugin; i18n block; nothing else)
 - tsconfig.json (field: astro/tsconfigs/strict) ("extends": "astro/tsconfigs/strict")
 - src/styles/global.css (field: @import "tailwindcss") (`@import "tailwindcss";`)
-- AGENTS.md:1-22 (development and documentation guidance); CLAUDE.md is a symlink to
+- AGENTS.md:1-22 fp=258e7155 (development and documentation guidance); CLAUDE.md is a symlink to
   AGENTS.md (repository root)

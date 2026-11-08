@@ -3,18 +3,18 @@ import Layout from '../layouts/Layout.astro';
 import Banner from '../components/Banner.astro';
 import Header from '../components/Header.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
-import { siteConfig } from '../site';
+import { siteConfigHrpauth } from '../site';
 import hrpauth from '../i18n/pages/hrpauth.json';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang, hrpauth);
 
 const features = [
-  { title: t('features.item1.title'), description: t('features.item1.desc'), icon: 'ID' },
-  { title: t('features.item2.title'), description: t('features.item2.desc'), icon: 'SK' },
-  { title: t('features.item3.title'), description: t('features.item3.desc'), icon: 'DX' },
-  { title: t('features.item4.title'), description: t('features.item4.desc'), icon: 'API' },
-  { title: t('features.item5.title'), description: t('features.item5.desc'), icon: 'OPS' },
+  { title: t('features.item1.title'), description: t('features.item1.desc'), icon: 'SSO' },
+  { title: t('features.item2.title'), description: t('features.item2.desc'), icon: 'REG' },
+  { title: t('features.item3.title'), description: t('features.item3.desc'), icon: '2FA' },
+  { title: t('features.item4.title'), description: t('features.item4.desc'), icon: 'ACCT' },
+  { title: t('features.item5.title'), description: t('features.item5.desc'), icon: 'OAUTH' },
   { title: t('features.item6.title'), description: t('features.item6.desc'), icon: 'OSS' },
 ];
 
@@ -24,9 +24,9 @@ const highlights = [
 ];
 
 const resources = [
-  { title: t('resources.docs.title'), description: t('resources.docs.desc'), href: siteConfig.docsUrl },
-  { title: t('resources.demo.title'), description: t('resources.demo.desc'), href: siteConfig.demoUrl },
-  { title: t('resources.source.title'), description: t('resources.source.desc'), href: siteConfig.repoUrl },
+  { title: t('resources.docs.title'), description: t('resources.docs.desc'), href: siteConfigHrpauth.hadocsUrl },
+  { title: t('resources.demo.title'), description: t('resources.demo.desc'), href: siteConfigHrpauth.hademoUrl },
+  { title: t('resources.source.title'), description: t('resources.source.desc'), href: siteConfigHrpauth.harepoUrl },
 ];
 ---
 
@@ -45,7 +45,12 @@ const resources = [
   <Header />
 
   <main>
-    < Banner pageUi={hrpauth} />
+    <Banner
+      pageUi={hrpauth}
+      projectName={siteConfigHrpauth.haprojectName}
+      primaryHref={siteConfigHrpauth.hademoUrl}
+      secondaryHref={siteConfigHrpauth.hadocsUrl}
+    />
 
     <section id="features" class="bg-gray-50 py-20">
       <div class="container mx-auto px-4">
@@ -101,20 +106,20 @@ const resources = [
             <div class="space-y-6">
               <div>
                 <p class="text-sm uppercase tracking-[0.2em] text-gray-400">{t('nav.docs')}</p>
-                <a href={siteConfig.docsUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-white hover:text-blue-200">
-                  {siteConfig.docsUrl}
+                <a href={siteConfigHrpauth.hadocsUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-white hover:text-blue-200">
+                  {siteConfigHrpauth.hadocsUrl}
                 </a>
               </div>
               <div>
                 <p class="text-sm uppercase tracking-[0.2em] text-gray-400">{t('nav.demo')}</p>
-                <a href={siteConfig.demoUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-white hover:text-blue-200">
-                  {siteConfig.demoUrl}
+                <a href={siteConfigHrpauth.hademoUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-white hover:text-blue-200">
+                  {siteConfigHrpauth.hademoUrl}
                 </a>
               </div>
               <div>
                 <p class="text-sm uppercase tracking-[0.2em] text-gray-400">{t('nav.source')}</p>
-                <a href={siteConfig.repoUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-white hover:text-blue-200">
-                  {siteConfig.repoUrl}
+                <a href={siteConfigHrpauth.harepoUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-white hover:text-blue-200">
+                  {siteConfigHrpauth.harepoUrl}
                 </a>
               </div>
             </div>
@@ -155,10 +160,10 @@ const resources = [
       <p class="text-sm text-gray-500">{t('footer.rights')}</p>
 
       <div class="flex flex-wrap items-center gap-5 text-sm font-medium text-gray-600">
-        <a href={siteConfig.docsUrl} target="_blank" rel="noreferrer" class="hover:text-blue-600">{t('footer.docs')}</a>
-        <a href={siteConfig.demoUrl} target="_blank" rel="noreferrer" class="hover:text-blue-600">{t('footer.demo')}</a>
-        <a href={siteConfig.repoUrl} target="_blank" rel="noreferrer" class="hover:text-blue-600">{t('footer.source')}</a>
-        <a href={siteConfig.communityUrl} target="_blank" rel="noreferrer" class="hover:text-blue-600">{t('footer.community')}</a>
+        <a href={siteConfigHrpauth.hadocsUrl} target="_blank" rel="noreferrer" class="hover:text-blue-600">{t('footer.docs')}</a>
+        <a href={siteConfigHrpauth.hademoUrl} target="_blank" rel="noreferrer" class="hover:text-blue-600">{t('footer.demo')}</a>
+        <a href={siteConfigHrpauth.harepoUrl} target="_blank" rel="noreferrer" class="hover:text-blue-600">{t('footer.source')}</a>
+        <a href={siteConfigHrpauth.hacommunityUrl} target="_blank" rel="noreferrer" class="hover:text-blue-600">{t('footer.community')}</a>
       </div>
     </div>
   </footer>

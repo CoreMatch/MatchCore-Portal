@@ -27,16 +27,16 @@ The portal addresses both Chinese- and English-speaking audiences.
 - Every new page must be created twice (root + zh-cn); the two copies can drift, and
   only the English copies carry the redirect script
   (src/pages/zh-cn/index.astro (field: pageUi={home}) and
-  src/pages/zh-cn/hrpauth.astro (field: Banner pageUi={hrpauth}) contain no script).
+  src/pages/zh-cn/hrpauth.astro (field: pageUi={hrpauth}) contain no script).
 - The redirect is client-side JavaScript: crawlers and no-JS users always land on the
   English page first; there is no hreflang/alternate metadata
   (src/layouts/Layout.astro (field: name="generator") emits only
   description/viewport/generator meta).
 - The fallback chain silently surfaces English strings on zh-cn pages when a key is
-  missing — currently visible: the zh-cn home bundle has no features.item5/item6, so
-  the English placeholders "gsd"/"Opmg" render instead
-  (src/i18n/pages/home.json (field: features.item5.title) via
-  src/i18n/utils.ts (field: pageUi[defaultLang])).
+  missing (src/i18n/utils.ts (field: pageUi[defaultLang])). The zh-cn and en
+  bundles of home.json and hrpauth.json currently carry identical key sets, so the
+  fallback is inert; adding a key to one language without the other silently
+  re-introduces mixed-language rendering.
 - URLs without a recognized language prefix are treated as English
   (src/i18n/utils.ts::getLangFromUrl).
 
@@ -45,7 +45,7 @@ The portal addresses both Chinese- and English-speaking audiences.
 - src/pages/index.astro (field: hasRedirected);
   src/pages/hrpauth.astro (field: hasRedirected) (browser-language redirect scripts)
 - src/pages/zh-cn/index.astro (field: pageUi={home});
-  src/pages/zh-cn/hrpauth.astro (field: Banner pageUi={hrpauth}) (zh-cn pages
+  src/pages/zh-cn/hrpauth.astro (field: pageUi={hrpauth}) (zh-cn pages
   without redirect script)
 - src/i18n/utils.ts::getLangFromUrl, src/i18n/utils.ts::useTranslations,
   src/i18n/utils.ts::useTranslatedPath; src/i18n/ui.ts::defaultLang

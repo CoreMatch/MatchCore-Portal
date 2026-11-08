@@ -1,16 +1,17 @@
 export const siteConfig = {
   projectName: 'MatchCore',
-  projectSubtitle: 'The next-generation Minecraft competitive gaming and esports platform',
-  docsUrl: 'https://wiki.samuelcheston.com/',
+  projectSubtitle: 'Bedwars matchmaking, ratings, and rankings for Minecraft',
+  docsUrl: 'https://wiki.mcnb.dev/',
   repoUrl: 'https://github.com/CoreMatch/MatchCoreArena-Client',
-  demoUrl: 'https://auth.samuelcheston.com/',
+  demoUrl: 'https://auth.mcnb.dev/',
   communityUrl: 'https://github.com/CoreMatch/MatchCoreArena-Client/issues',
-} 
+}
+
 export const siteConfigHrpauth = {
   haprojectName: 'HRPAuth',
-  haprojectSubtitle: 'The next-generation Minecraft authentication and skin management service',
-  hadocsUrl: 'https://wiki.samuelcheston.com/',
+  haprojectSubtitle: 'The authentication core and account portal of the MatchCore ecosystem',
+  hadocsUrl: 'https://wiki.mcnb.dev/projects/hrpauth/',
   harepoUrl: 'https://github.com/CoreMatch/HRPAuth',
-  hademoUrl: 'https://auth.samuelcheston.com/',
+  hademoUrl: 'https://auth.mcnb.dev/',
   hacommunityUrl: 'https://github.com/CoreMatch/HRPAuth/issues',
 } as const;
