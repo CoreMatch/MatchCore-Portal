@@ -26,11 +26,15 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Service status probe chip: colors follow the real probe result. */
-[data-arena-status][data-state="up"] [data-dot] {
+/* Service status probe chip: colors follow the real probe result.
+   live / snap-up = reachable; live-down / snap-down = problem;
+   pending / unknown = no claim either way. */
+[data-arena-status][data-state="live"] [data-dot],
+[data-arena-status][data-state="snap-up"] [data-dot] {
   background: var(--color-arena-ok);
 }
-[data-arena-status][data-state="down"] [data-dot] {
+[data-arena-status][data-state="live-down"] [data-dot],
+[data-arena-status][data-state="snap-down"] [data-dot] {
   background: var(--color-arena-accent);
 }
 [data-arena-status][data-state="unknown"] [data-dot],
