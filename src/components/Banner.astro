@@ -4,9 +4,17 @@ import { siteConfig } from '../site';
 
 interface Props {
   pageUi?: any;
+  projectName?: string;
+  primaryHref?: string;
+  secondaryHref?: string;
 }
 
-const { pageUi } = Astro.props;
+const {
+  pageUi,
+  projectName = siteConfig.projectName,
+  primaryHref = siteConfig.demoUrl,
+  secondaryHref = siteConfig.docsUrl,
+} = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang, pageUi);
 ---
@@ -19,7 +27,7 @@ const t = useTranslations(lang, pageUi);
     <div class="mx-auto max-w-5xl">
       <div class="mx-auto max-w-3xl text-center">
         <h1 class="mb-4 text-4xl font-extrabold leading-tight tracking-tight text-gray-900 md:text-6xl">
-          {siteConfig.projectName}
+          {projectName}
         </h1>
         <p class="mx-auto mb-6 max-w-3xl text-lg font-medium text-blue-700 md:text-2xl">
           {t('banner.subtitle')}
@@ -27,7 +35,7 @@ const t = useTranslations(lang, pageUi);
       
         <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
-            href={siteConfig.docsUrl}
+            href={primaryHref}
             target="_blank"
             rel="noreferrer"
             class="w-full rounded-xl bg-blue-600 px-8 py-4 text-center font-semibold text-white transition-all shadow-lg shadow-blue-200 hover:-translate-y-0.5 hover:bg-blue-700 sm:w-auto"
@@ -35,7 +43,7 @@ const t = useTranslations(lang, pageUi);
             {t('banner.ctaPrimary')}
           </a>
           <a
-            href={siteConfig.demoUrl}
+            href={secondaryHref}
             target="_blank"
             rel="noreferrer"
             class="w-full rounded-xl border border-gray-200 bg-white px-8 py-4 text-center font-semibold text-gray-700 transition-all hover:border-gray-300 hover:bg-gray-50 sm:w-auto"
@@ -58,15 +66,6 @@ const t = useTranslations(lang, pageUi);
           <p class="text-sm text-gray-500">{t('banner.stat3.label')}</p>
           <p class="mt-2 text-base font-semibold text-gray-900">{t('banner.stat3.value')}</p>
         </div>
-      </div>
-
-      <div class="relative mt-12">
-        <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-blue-100 to-indigo-100 opacity-30 blur"></div>
-        <img
-          src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Developer+portal+dashboard+for+Minecraft+authentication+and+skin+management%2C+modern+dark+and+light+UI%2C+account+identity+panels%2C+avatar+skin+preview+cards%2C+clean+developer+tool+design%2C+high+fidelity%2C+realistic+product+interface&image_size=landscape_16_9"
-          alt="MatchCore portal preview"
-          class="relative rounded-2xl border border-gray-100 shadow-2xl"
-        />
       </div>
     </div>
   </div>
