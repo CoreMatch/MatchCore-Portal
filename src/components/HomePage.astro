@@ -1,5 +1,4 @@
 ---
-import Banner from './Banner.astro';
 import Header from './Header.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import { siteConfig } from '../site';
@@ -12,127 +11,217 @@ const { pageUi } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang, pageUi);
 
-const features = [
-  { title: t('features.item1.title'), description: t('features.item1.desc'), icon: 'BW' },
-  { title: t('features.item2.title'), description: t('features.item2.desc'), icon: 'ELO' },
-  { title: t('features.item3.title'), description: t('features.item3.desc'), icon: 'TOP' },
-  { title: t('features.item4.title'), description: t('features.item4.desc'), icon: 'LOG' },
+const navItems = [
+  { name: t('nav.howto'), href: '#how-it-works' },
+  { name: t('nav.modes'), href: '#modes' },
+  { name: t('nav.account'), href: '#account' },
+  { name: t('nav.eco'), href: '#ecosystem' },
 ];
 
-const highlights = [
-  { title: t('highlights.item1.title'), description: t('highlights.item1.desc') },
-  { title: t('highlights.item2.title'), description: t('highlights.item2.desc') },
-  { title: t('highlights.item3.title'), description: t('highlights.item3.desc') },
-  { title: t('highlights.item4.title'), description: t('highlights.item4.desc') },
+const facts = [
+  { label: t('hero.fact1.label'), value: t('hero.fact1.value') },
+  { label: t('hero.fact2.label'), value: t('hero.fact2.value') },
+  { label: t('hero.fact3.label'), value: t('hero.fact3.value') },
 ];
 
-const resources = [
-  { title: t('resources.docs.title'), description: t('resources.docs.desc'), href: siteConfig.docsUrl },
-  { title: t('resources.demo.title'), description: t('resources.demo.desc'), href: siteConfig.demoUrl },
-  { title: t('resources.source.title'), description: t('resources.source.desc'), href: siteConfig.repoUrl },
+const steps = [
+  { title: t('howto.step1.title'), desc: t('howto.step1.desc'), action: t('howto.step1.action'), href: siteConfig.demoUrl },
+  { title: t('howto.step2.title'), desc: t('howto.step2.desc'), action: t('howto.step2.action'), href: siteConfig.repoUrl },
+  { title: t('howto.step3.title'), desc: t('howto.step3.desc') },
+  { title: t('howto.step4.title'), desc: t('howto.step4.desc') },
+];
+
+const modes = [
+  { code: '1v1', title: t('modes.m1.title'), desc: t('modes.m1.desc') },
+  { code: '2v2', title: t('modes.m2.title'), desc: t('modes.m2.desc') },
+];
+
+const accountItems = [
+  { title: t('account.i1.title'), desc: t('account.i1.desc') },
+  { title: t('account.i2.title'), desc: t('account.i2.desc') },
+  { title: t('account.i3.title'), desc: t('account.i3.desc') },
+];
+
+const ecoLinks = [
+  { title: t('eco.wiki.title'), desc: t('eco.wiki.desc'), href: siteConfig.docsUrl },
+  { title: t('eco.source.title'), desc: t('eco.source.desc'), href: siteConfig.repoUrl },
+  { title: t('eco.status.title'), desc: t('eco.status.desc'), href: siteConfig.statusUrl },
 ];
 ---
 
-<Header />
+<Header navItems={navItems} />
 
 <main>
-  <Banner pageUi={pageUi} />
-
-  <section id="features" class="bg-gray-50 py-20">
+  <!-- Hero -->
+  <section class="border-b border-arena-edge bg-arena-base py-24">
     <div class="container mx-auto px-4">
-      <div class="mx-auto mb-16 max-w-3xl text-center">
-        <h2 class="mb-4 text-3xl font-bold text-gray-900">{t('features.title')}</h2>
-        <p class="text-gray-600">{t('features.description')}</p>
-      </div>
+      <div class="mx-auto max-w-4xl text-center">
+        <h1 class="mb-6 text-4xl font-extrabold leading-tight tracking-tight text-arena-ink md:text-[52px]">
+          {t('hero.title')}
+        </h1>
+        <p class="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-arena-muted md:text-xl">
+          {t('hero.subtitle')}
+        </p>
 
-      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {features.map((feature) => (
-          <div class="rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition-shadow hover:shadow-md">
-            <div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-sm font-bold text-blue-700">
-              {feature.icon}
-            </div>
-            <h3 class="mb-3 text-xl font-bold text-gray-900">{feature.title}</h3>
-            <p class="leading-relaxed text-gray-600">{feature.description}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-white py-20">
-    <div class="container mx-auto px-4">
-      <div class="mx-auto mb-12 max-w-3xl text-center">
-        <h2 class="mb-4 text-3xl font-bold text-gray-900">{t('highlights.title')}</h2>
-      </div>
-
-      <div class="grid gap-6 md:grid-cols-2">
-        {highlights.map((highlight) => (
-          <div class="rounded-2xl border border-blue-100 bg-blue-50/60 p-8">
-            <h3 class="mb-3 text-xl font-bold text-gray-900">{highlight.title}</h3>
-            <p class="leading-relaxed text-gray-700">{highlight.description}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section id="about" class="bg-gray-950 py-20 text-white">
-    <div class="container mx-auto px-4">
-      <div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
-        <div class="max-w-3xl">
-          <div class="mb-4 inline-flex items-center rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm text-blue-200">
-            {t('about.status')}
-          </div>
-          <h2 class="mb-6 text-3xl font-bold">{t('about.title')}</h2>
-          <p class="mb-5 leading-8 text-gray-300">{t('about.p1')}</p>
-          <p class="leading-8 text-gray-300">{t('about.p2')}</p>
-        </div>
-
-        <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
-          <div class="space-y-6">
-            <div>
-              <p class="text-sm uppercase tracking-[0.2em] text-gray-400">{t('nav.docs')}</p>
-              <a href={siteConfig.docsUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-white hover:text-blue-200">
-                {siteConfig.docsUrl}
-              </a>
-            </div>
-            <div>
-              <p class="text-sm uppercase tracking-[0.2em] text-gray-400">{t('nav.demo')}</p>
-              <a href={siteConfig.demoUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-white hover:text-blue-200">
-                {siteConfig.demoUrl}
-              </a>
-            </div>
-            <div>
-              <p class="text-sm uppercase tracking-[0.2em] text-gray-400">{t('nav.source')}</p>
-              <a href={siteConfig.repoUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-white hover:text-blue-200">
-                {siteConfig.repoUrl}
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="resources" class="bg-white py-20">
-    <div class="container mx-auto px-4">
-      <div class="mx-auto mb-16 max-w-3xl text-center">
-        <h2 class="mb-4 text-3xl font-bold text-gray-900">{t('resources.title')}</h2>
-        <p class="text-gray-600">{t('resources.description')}</p>
-      </div>
-
-      <div class="grid gap-6 md:grid-cols-3">
-        {resources.map((resource) => (
+        <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
-            href={resource.href}
+            href={siteConfig.demoUrl}
             target="_blank"
             rel="noreferrer"
-            class="group rounded-2xl border border-gray-100 bg-gray-50 p-8 transition-all hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-lg"
+            class="w-full rounded-md bg-arena-accent px-8 py-4 text-center text-base font-semibold text-white transition-opacity hover:opacity-90 sm:w-auto"
           >
-            <h3 class="mb-3 text-xl font-bold text-gray-900">{resource.title}</h3>
-            <p class="mb-6 leading-relaxed text-gray-600">{resource.description}</p>
-            <span class="font-semibold text-blue-600 transition-colors group-hover:text-blue-700">
-              {t('resources.action')}
+            {t('hero.ctaPrimary')}
+          </a>
+          <a
+            href="#how-it-works"
+            class="w-full rounded-md border border-arena-edge-strong bg-arena-panel px-8 py-4 text-center text-base font-semibold text-arena-ink transition-colors hover:border-arena-faint sm:w-auto"
+          >
+            {t('hero.ctaSecondary')}
+          </a>
+        </div>
+      </div>
+
+      <div class="mx-auto mt-14 grid max-w-4xl gap-4 md:grid-cols-3">
+        {facts.map((fact) => (
+          <div class="rounded-lg border border-arena-edge bg-arena-panel p-5 text-left">
+            <p class="text-sm text-arena-faint">{fact.label}</p>
+            <p class="mt-2 text-base font-semibold text-arena-ink">{fact.value}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how-it-works" class="border-b border-arena-edge bg-arena-base py-20">
+    <div class="container mx-auto px-4">
+      <div class="mx-auto mb-12 max-w-3xl text-center">
+        <h2 class="mb-4 text-3xl font-bold text-arena-ink">{t('howto.title')}</h2>
+        <p class="text-arena-muted">{t('howto.desc')}</p>
+      </div>
+
+      <div class="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
+        {steps.map((step, i) => (
+          <div class="rounded-lg border border-arena-edge bg-arena-panel p-8">
+            <div class="mb-4 flex items-center gap-3">
+              <span class="flex h-10 w-10 items-center justify-center rounded-md border border-arena-edge-strong bg-arena-raised font-mono text-lg font-bold text-arena-accent">{i + 1}</span>
+              <h3 class="text-xl font-bold text-arena-ink">{step.title}</h3>
+            </div>
+            <p class="leading-relaxed text-arena-muted">{step.desc}</p>
+            {step.href && (
+              <a
+                href={step.href}
+                target="_blank"
+                rel="noreferrer"
+                class="mt-4 inline-block font-semibold text-arena-accent transition-opacity hover:opacity-80"
+              >
+                {step.action} →
+              </a>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Modes & rating -->
+  <section id="modes" class="border-b border-arena-edge bg-arena-base py-20">
+    <div class="container mx-auto px-4">
+      <div class="mx-auto mb-12 max-w-3xl text-center">
+        <h2 class="mb-4 text-3xl font-bold text-arena-ink">{t('modes.title')}</h2>
+        <p class="text-arena-muted">{t('modes.desc')}</p>
+      </div>
+
+      <div class="mx-auto grid max-w-5xl gap-6 lg:grid-cols-2">
+        <div class="grid gap-6">
+          {modes.map((mode) => (
+            <div class="flex items-start gap-5 rounded-lg border border-arena-edge bg-arena-panel p-8">
+              <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-md border border-arena-edge-strong bg-arena-raised font-mono text-lg font-bold text-arena-ink">{mode.code}</span>
+              <div>
+                <h3 class="mb-2 text-xl font-bold text-arena-ink">{mode.title}</h3>
+                <p class="leading-relaxed text-arena-muted">{mode.desc}</p>
+              </div>
+            </div>
+          ))}
+          <div class="rounded-lg border border-arena-edge bg-arena-panel p-8">
+            <p class="leading-relaxed text-arena-muted">{t('modes.rank.note')}</p>
+          </div>
+        </div>
+
+        <div class="rounded-lg border border-arena-edge bg-arena-panel p-8">
+          <h3 class="mb-4 text-xl font-bold text-arena-ink">{t('modes.elo.title')}</h3>
+          <p class="mb-6 leading-relaxed text-arena-muted">{t('modes.elo.desc')}</p>
+          <div class="rounded-md border border-arena-edge-strong bg-arena-base p-5 text-center font-mono text-lg text-arena-ink">
+            {t('modes.elo.formula')}
+          </div>
+          <ul class="mt-6 space-y-3">
+            <li class="flex gap-3 text-sm leading-relaxed text-arena-muted">
+              <span class="mt-1 h-2 w-2 shrink-0 bg-arena-accent"></span>
+              {t('modes.elo.l1')}
+            </li>
+            <li class="flex gap-3 text-sm leading-relaxed text-arena-muted">
+              <span class="mt-1 h-2 w-2 shrink-0 bg-arena-accent"></span>
+              {t('modes.elo.l2')}
+            </li>
+            <li class="flex gap-3 text-sm leading-relaxed text-arena-muted">
+              <span class="mt-1 h-2 w-2 shrink-0 bg-arena-accent"></span>
+              {t('modes.elo.l3')}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Account & security -->
+  <section id="account" class="border-b border-arena-edge bg-arena-base py-20">
+    <div class="container mx-auto px-4">
+      <div class="mx-auto mb-12 max-w-3xl text-center">
+        <h2 class="mb-4 text-3xl font-bold text-arena-ink">{t('account.title')}</h2>
+        <p class="text-arena-muted">{t('account.desc')}</p>
+      </div>
+
+      <div class="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">
+        {accountItems.map((item) => (
+          <div class="rounded-lg border border-arena-edge bg-arena-panel p-8">
+            <h3 class="mb-3 text-xl font-bold text-arena-ink">{item.title}</h3>
+            <p class="leading-relaxed text-arena-muted">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mx-auto mt-10 max-w-5xl text-center">
+        <a
+          href={siteConfig.demoUrl}
+          target="_blank"
+          rel="noreferrer"
+          class="inline-block rounded-md bg-arena-accent px-8 py-4 text-base font-semibold text-white transition-opacity hover:opacity-90"
+        >
+          {t('account.cta')}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ecosystem -->
+  <section id="ecosystem" class="bg-arena-base py-20">
+    <div class="container mx-auto px-4">
+      <div class="mx-auto mb-12 max-w-3xl text-center">
+        <h2 class="mb-4 text-3xl font-bold text-arena-ink">{t('eco.title')}</h2>
+      </div>
+
+      <div class="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">
+        {ecoLinks.map((link) => (
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noreferrer"
+            class="group rounded-lg border border-arena-edge bg-arena-panel p-8 transition-colors hover:border-arena-edge-strong"
+          >
+            <h3 class="mb-3 text-xl font-bold text-arena-ink">{link.title}</h3>
+            <p class="mb-6 leading-relaxed text-arena-muted">{link.desc}</p>
+            <span class="font-semibold text-arena-accent">
+              {t('resources.action')} →
             </span>
           </a>
         ))}
@@ -141,16 +230,16 @@ const resources = [
   </section>
 </main>
 
-<footer class="border-t border-gray-100 bg-white py-12">
+<footer class="border-t border-arena-edge bg-arena-base py-12">
   <div class="container mx-auto flex flex-col gap-6 px-4 md:flex-row md:items-center md:justify-between">
-    <p class="text-sm text-gray-500">{t('footer.rights')}</p>
+    <p class="text-sm text-arena-faint">{t('footer.rights')}</p>
 
-    <div class="flex flex-wrap items-center gap-5 text-sm font-medium text-gray-600">
-      <a href={siteConfig.docsUrl} target="_blank" rel="noreferrer" class="hover:text-blue-600">{t('footer.docs')}</a>
-      <a href={siteConfig.demoUrl} target="_blank" rel="noreferrer" class="hover:text-blue-600">{t('footer.demo')}</a>
-      <a href={siteConfig.repoUrl} target="_blank" rel="noreferrer" class="hover:text-blue-600">{t('footer.source')}</a>
-      <a href={siteConfig.communityUrl} target="_blank" rel="noreferrer" class="hover:text-blue-600">{t('footer.community')}</a>
-      <a href={`mailto:${siteConfig.contactEmail}`} class="hover:text-blue-600">{t('footer.contact')}</a>
+    <div class="flex flex-wrap items-center gap-5 text-sm font-medium text-arena-muted">
+      <a href={siteConfig.docsUrl} target="_blank" rel="noreferrer" class="hover:text-arena-ink">{t('footer.docs')}</a>
+      <a href={siteConfig.demoUrl} target="_blank" rel="noreferrer" class="hover:text-arena-ink">{t('footer.demo')}</a>
+      <a href={siteConfig.repoUrl} target="_blank" rel="noreferrer" class="hover:text-arena-ink">{t('footer.source')}</a>
+      <a href={siteConfig.communityUrl} target="_blank" rel="noreferrer" class="hover:text-arena-ink">{t('footer.community')}</a>
+      <a href={`mailto:${siteConfig.contactEmail}`} class="hover:text-arena-ink">{t('footer.contact')}</a>
     </div>
   </div>
 </footer>

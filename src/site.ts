@@ -5,6 +5,7 @@ export const siteConfig = {
   repoUrl: 'https://github.com/CoreMatch/MatchCoreArena-Client',
   demoUrl: 'https://auth.mcnb.dev/',
   communityUrl: 'https://github.com/CoreMatch/MatchCoreArena-Client/issues',
+  statusUrl: 'https://arena.mcnb.dev/api/status',
   contactEmail: 'contact@mcnb.dev',
 }
 

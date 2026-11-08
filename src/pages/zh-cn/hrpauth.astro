@@ -41,73 +41,73 @@ const resources = [
       secondaryHref={siteConfigHrpauth.hadocsUrl}
     />
 
-    <section id="features" class="bg-gray-50 py-20">
+    <section id="features" class="border-b border-arena-edge bg-arena-base py-20">
       <div class="container mx-auto px-4">
         <div class="mx-auto mb-16 max-w-3xl text-center">
-          <h2 class="mb-4 text-3xl font-bold text-gray-900">{t('features.title')}</h2>
-          <p class="text-gray-600">{t('features.description')}</p>
+          <h2 class="mb-4 text-3xl font-bold text-arena-ink">{t('features.title')}</h2>
+          <p class="text-arena-muted">{t('features.description')}</p>
         </div>
 
         <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {features.map((feature) => (
-            <div class="rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition-shadow hover:shadow-md">
-              <div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-sm font-bold text-blue-700">
+            <div class="rounded-lg border border-arena-edge bg-arena-panel p-8">
+              <div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-md border border-arena-edge-strong bg-arena-raised text-sm font-bold text-arena-accent">
                 {feature.icon}
               </div>
-              <h3 class="mb-3 text-xl font-bold text-gray-900">{feature.title}</h3>
-              <p class="leading-relaxed text-gray-600">{feature.description}</p>
+              <h3 class="mb-3 text-xl font-bold text-arena-ink">{feature.title}</h3>
+              <p class="leading-relaxed text-arena-muted">{feature.description}</p>
             </div>
           ))}
         </div>
       </div>
     </section>
 
-    <section class="bg-white py-20">
+    <section class="border-b border-arena-edge bg-arena-base py-20">
       <div class="container mx-auto px-4">
         <div class="mx-auto mb-12 max-w-3xl text-center">
-          <h2 class="mb-4 text-3xl font-bold text-gray-900">{t('highlights.title')}</h2>
+          <h2 class="mb-4 text-3xl font-bold text-arena-ink">{t('highlights.title')}</h2>
         </div>
 
         <div class="grid gap-6 md:grid-cols-2">
           {highlights.map((highlight) => (
-            <div class="rounded-2xl border border-blue-100 bg-blue-50/60 p-8">
-              <h3 class="mb-3 text-xl font-bold text-gray-900">{highlight.title}</h3>
-              <p class="leading-relaxed text-gray-700">{highlight.description}</p>
+            <div class="rounded-lg border border-arena-edge bg-arena-panel p-8">
+              <h3 class="mb-3 text-xl font-bold text-arena-ink">{highlight.title}</h3>
+              <p class="leading-relaxed text-arena-muted">{highlight.description}</p>
             </div>
           ))}
         </div>
       </div>
     </section>
 
-    <section id="about" class="bg-gray-950 py-20 text-white">
+    <section id="about" class="border-b border-arena-edge bg-arena-panel py-20 text-arena-ink">
       <div class="container mx-auto px-4">
         <div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
           <div class="max-w-3xl">
-            <div class="mb-4 inline-flex items-center rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm text-blue-200">
+            <div class="mb-4 inline-flex items-center rounded-md border border-arena-edge-strong bg-arena-raised px-4 py-1.5 text-sm text-arena-muted">
               {t('about.status')}
             </div>
             <h2 class="mb-6 text-3xl font-bold">{t('about.title')}</h2>
-            <p class="mb-5 leading-8 text-gray-300">{t('about.p1')}</p>
-            <p class="leading-8 text-gray-300">{t('about.p2')}</p>
+            <p class="mb-5 leading-8 text-arena-muted">{t('about.p1')}</p>
+            <p class="leading-8 text-arena-muted">{t('about.p2')}</p>
           </div>
 
-          <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
+          <div class="rounded-lg border border-arena-edge bg-arena-base p-8">
             <div class="space-y-6">
               <div>
-                <p class="text-sm uppercase tracking-[0.2em] text-gray-400">{t('nav.docs')}</p>
-                <a href={siteConfigHrpauth.hadocsUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-white hover:text-blue-200">
+                <p class="text-sm uppercase tracking-[0.2em] text-arena-faint">{t('nav.docs')}</p>
+                <a href={siteConfigHrpauth.hadocsUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-arena-ink hover:text-arena-accent">
                   {siteConfigHrpauth.hadocsUrl}
                 </a>
               </div>
               <div>
-                <p class="text-sm uppercase tracking-[0.2em] text-gray-400">{t('nav.demo')}</p>
-                <a href={siteConfigHrpauth.hademoUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-white hover:text-blue-200">
+                <p class="text-sm uppercase tracking-[0.2em] text-arena-faint">{t('nav.demo')}</p>
+                <a href={siteConfigHrpauth.hademoUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-arena-ink hover:text-arena-accent">
                   {siteConfigHrpauth.hademoUrl}
                 </a>
               </div>
               <div>
-                <p class="text-sm uppercase tracking-[0.2em] text-gray-400">{t('nav.source')}</p>
-                <a href={siteConfigHrpauth.harepoUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-white hover:text-blue-200">
+                <p class="text-sm uppercase tracking-[0.2em] text-arena-faint">{t('nav.source')}</p>
+                <a href={siteConfigHrpauth.harepoUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-arena-ink hover:text-arena-accent">
                   {siteConfigHrpauth.harepoUrl}
                 </a>
               </div>
@@ -117,11 +117,11 @@ const resources = [
       </div>
     </section>
 
-    <section id="resources" class="bg-white py-20">
+    <section id="resources" class="bg-arena-base py-20">
       <div class="container mx-auto px-4">
         <div class="mx-auto mb-16 max-w-3xl text-center">
-          <h2 class="mb-4 text-3xl font-bold text-gray-900">{t('resources.title')}</h2>
-          <p class="text-gray-600">{t('resources.description')}</p>
+          <h2 class="mb-4 text-3xl font-bold text-arena-ink">{t('resources.title')}</h2>
+          <p class="text-arena-muted">{t('resources.description')}</p>
         </div>
 
         <div class="grid gap-6 md:grid-cols-3">
@@ -130,12 +130,12 @@ const resources = [
               href={resource.href}
               target="_blank"
               rel="noreferrer"
-              class="group rounded-2xl border border-gray-100 bg-gray-50 p-8 transition-all hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-lg"
+              class="group rounded-lg border border-arena-edge bg-arena-panel p-8 transition-colors hover:border-arena-edge-strong"
             >
-              <h3 class="mb-3 text-xl font-bold text-gray-900">{resource.title}</h3>
-              <p class="mb-6 leading-relaxed text-gray-600">{resource.description}</p>
-              <span class="font-semibold text-blue-600 transition-colors group-hover:text-blue-700">
-                {t('resources.action')}
+              <h3 class="mb-3 text-xl font-bold text-arena-ink">{resource.title}</h3>
+              <p class="mb-6 leading-relaxed text-arena-muted">{resource.description}</p>
+              <span class="font-semibold text-arena-accent">
+                {t('resources.action')} →
               </span>
             </a>
           ))}
@@ -144,16 +144,16 @@ const resources = [
     </section>
   </main>
 
-  <footer class="border-t border-gray-100 bg-white py-12">
+  <footer class="border-t border-arena-edge bg-arena-base py-12">
     <div class="container mx-auto flex flex-col gap-6 px-4 md:flex-row md:items-center md:justify-between">
-      <p class="text-sm text-gray-500">{t('footer.rights')}</p>
+      <p class="text-sm text-arena-faint">{t('footer.rights')}</p>
 
-      <div class="flex flex-wrap items-center gap-5 text-sm font-medium text-gray-600">
-        <a href={siteConfigHrpauth.hadocsUrl} target="_blank" rel="noreferrer" class="hover:text-blue-600">{t('footer.docs')}</a>
-        <a href={siteConfigHrpauth.hademoUrl} target="_blank" rel="noreferrer" class="hover:text-blue-600">{t('footer.demo')}</a>
-        <a href={siteConfigHrpauth.harepoUrl} target="_blank" rel="noreferrer" class="hover:text-blue-600">{t('footer.source')}</a>
-        <a href={siteConfigHrpauth.hacommunityUrl} target="_blank" rel="noreferrer" class="hover:text-blue-600">{t('footer.community')}</a>
-        <a href={`mailto:${siteConfig.contactEmail}`} class="hover:text-blue-600">{t('footer.contact')}</a>
+      <div class="flex flex-wrap items-center gap-5 text-sm font-medium text-arena-muted">
+        <a href={siteConfigHrpauth.hadocsUrl} target="_blank" rel="noreferrer" class="hover:text-arena-ink">{t('footer.docs')}</a>
+        <a href={siteConfigHrpauth.hademoUrl} target="_blank" rel="noreferrer" class="hover:text-arena-ink">{t('footer.demo')}</a>
+        <a href={siteConfigHrpauth.harepoUrl} target="_blank" rel="noreferrer" class="hover:text-arena-ink">{t('footer.source')}</a>
+        <a href={siteConfigHrpauth.hacommunityUrl} target="_blank" rel="noreferrer" class="hover:text-arena-ink">{t('footer.community')}</a>
+        <a href={`mailto:${siteConfig.contactEmail}`} class="hover:text-arena-ink">{t('footer.contact')}</a>
       </div>
     </div>
   </footer>
