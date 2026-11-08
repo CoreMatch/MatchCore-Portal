@@ -15,7 +15,7 @@ HA-Contract, fix the entry, not the contract.
 | [0002](0002-bilingual-content-via-duplicated-zh-cn-routes.md) | Bilingual Content via Duplicated /zh-cn Routes with English Default | accepted | English pages live at the root; each zh-cn page is a physical duplicate under /zh-cn/, with a client-side browser-language redirect. |
 | [0003](0003-two-landing-pages-linking-outward.md) | Scope Is Two Landing Pages Linking Outward for Docs, Account Portal, and Code | accepted | The site publishes exactly two product landing pages (MatchCore Arena and HRPAuth) written from a user's point of view, and delegates docs, account access, source, and community to external endpoints. |
 | [0004](0004-division-of-labor-with-samuelportal.md) | Division of Labor with SamuelPortal: Product Portal vs Personal Portfolio | accepted | MatchCore-Portal is the product-facing bilingual portal; SamuelPortal is the author's English-only personal portfolio; the two sites do not link to each other. |
-| [0005](0005-personal-account-hosting-no-deploy-pipeline.md) | Repository Under the CoreMatch Organization; Build CI Only, No In-Repo Deployment Pipeline | accepted | The repository now lives under the CoreMatch organization with a build-only CI workflow; no deployment configuration exists in the tree and no live URL for the portal was found. |
+| [0005](0005-personal-account-hosting-no-deploy-pipeline.md) | Published at the mcnb.dev Apex from the Production aaPanel Site Directory | accepted | The portal is served at https://mcnb.dev/ from the production server's static site directory for that domain; deployment is a manual build-and-sync operator action, and CI only proves the build. |
 
 ## Maintenance
 

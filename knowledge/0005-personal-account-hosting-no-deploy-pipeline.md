@@ -1,60 +1,63 @@
-# 0005. Repository Under the CoreMatch Organization; Build CI Only, No In-Repo Deployment Pipeline
+# 0005. Published at the mcnb.dev Apex from the Production aaPanel Site Directory
 
 ## Status
 accepted
 
 ## Context
-The repository originally lived under the author's personal GitHub account while
-the ecosystem repositories it links to sit under the CoreMatch organization. It
-has since moved to CoreMatch, and a minimal build CI was added; how the built
-site reaches production is still not visible inside the repository.
+The repository moved from the author's personal GitHub account to the CoreMatch
+organization and gained a build CI. The author designated the ecosystem's main
+domain, the mcnb.dev apex ("mcnb" = MatchCore), as the portal's address, served
+from the production server's site directory for that domain.
 
 ## Decision
 Observed state:
 
-- The repository is hosted at github.com/CoreMatch/MatchCore-Portal. The former
-  SamuelCheston/MatchCore-Portal URL redirects there (both URLs resolve to the
-  same HEAD via `git ls-remote`, and the GitHub API reports full_name
-  CoreMatch/MatchCore-Portal for both). No file in the repository (README.md
-  (field: # MatchCore-Portal) is title-only; AGENTS.md covers development only)
-  documents the hosting choice.
-- The tracked tree contains a CI workflow that only installs dependencies and
-  builds (.github/workflows/ci.yml (field: npm run build)). There is no hosting
-  adapter, no `site` property in astro.config.mjs, no Pages configuration
-  (GitHub API `pages` endpoint returns 404 for the repository), and no deploy
-  step. Deployment target and mechanism: not verified.
-- The site publishes outbound links to wiki.mcnb.dev and auth.mcnb.dev plus
-  CoreMatch GitHub repositories (src/site.ts (field: mcnb.dev)). No live URL
-  serving this portal was found on 2026-11-08: GitHub Pages paths under
-  samuelcheston.github.io return 404, and the mcnb.dev subdomains that answer
-  (matchcore.*, portal.*) serve the HRPAuth web app, not this site. Whether or
-  where the portal is published: pending author confirmation.
+- The repository is hosted at github.com/CoreMatch/MatchCore-Portal (the former
+  SamuelCheston/MatchCore-Portal URL redirects there). The tracked tree
+  contains a build-only CI (.github/workflows/ci.yml (field: npm run build));
+  there is no in-repo deployment pipeline and no `site` property in
+  astro.config.mjs.
+- The portal is published at https://mcnb.dev/ from the production server
+  (aaPanel-managed nginx). The vhost for `server_name mcnb.dev` is purely
+  static with root /www/wwwroot/mcnb.dev — no proxy_pass, no rewrite rules
+  [xref] (/www/server/panel/vhost/nginx/mcnb.dev.conf). No other vhost claims
+  the apex.
+- The site directory holds the built portal (index.html, hrpauth/, zh-cn/,
+  _astro/, favicons), owned www:www with 644/755 permissions, plus the panel's
+  error pages 404.html/502.html (referenced by the vhost `error_page`
+  directives) and the panel's .user.ini [xref] (/www/wwwroot/mcnb.dev). The
+  pre-existing sample site was backed up in full before replacement [xref]
+  (/www/wwwroot/mcnb.dev.bak-20261108).
+- Deployment is an operator action, not a repo mechanism: build locally
+  (`npm ci && npm run build`) and sync `dist/` into the site root, preserving
+  the panel's error pages and ownership pattern.
 
 ## Consequences
-- With no in-repo deployment configuration and no observed live URL, building
-  and releasing the site depends on tooling and decisions outside this
-  repository; a maintainer cannot verify from the tree where or how the site is
-  served. Publishing it (e.g. GitHub Pages or a mcnb.dev subdomain) is an
-  author decision still outstanding.
-- The repository homepage field on GitHub is empty; once a live URL exists it
-  should be set there and reflected here.
-- The local clone's origin should point at
-  https://github.com/CoreMatch/MatchCore-Portal.git; the old personal-account
-  URL keeps working only through GitHub's redirect.
+- Publishing a change requires the manual build-and-sync sequence against the
+  production server; nothing in the tree automates it, and CI only proves the
+  build.
+- The apex serves only this site (verified 2026-11-08: no MX/TXT records, no
+  ecosystem code referencing the apex URL, and the directory previously held
+  only the panel sample page), so the portal displaces no other service.
+- The panel error pages 404.html/502.html are not portal content; they must be
+  kept in place during future syncs because the vhost references them.
+- The repository homepage field on GitHub is empty; it can now be set to
+  https://mcnb.dev/ (author decision outstanding).
 
 ## Evidence
-- `git ls-remote` of both https://github.com/SamuelCheston/MatchCore-Portal.git
-  and https://github.com/CoreMatch/MatchCore-Portal.git returned the same HEAD
-  (6ec19a6) on 2026-11-08; GitHub API `repos/SamuelCheston/MatchCore-Portal`
-  reports full_name CoreMatch/MatchCore-Portal (redirect)
-- .github/workflows/ci.yml (build job only: checkout, setup-node, `npm ci`,
-  `npm run build`)
-- astro.config.mjs::defineConfig (no `site`, no adapter); package.json (field:
-  scripts) (scripts limited to dev/build/preview/astro)
-- GitHub API `repos/CoreMatch/MatchCore-Portal/pages` -> 404, `has_pages` false,
-  `homepage` null (checked 2026-11-08)
-- Probes on 2026-11-08: samuelcheston.github.io/MatchCore-Portal and
-  /matchcore-portal -> 404; matchcore.mcnb.dev and portal.mcnb.dev -> 200 but
-  serve the HRPAuth web app (title "HRPAuth")
-- src/site.ts (field: mcnb.dev) (outbound destinations); README.md (field:
-  # MatchCore-Portal) (title-only)
+- .github/workflows/ci.yml (build job only); astro.config.mjs::defineConfig
+  (no `site`, no adapter); `git ls-files` contains no deploy workflow or CNAME
+  file
+- Probes on 2026-11-08: https://mcnb.dev/ -> 200, title "MatchCore Arena |
+  Bedwars matchmaking and rankings for Minecraft"; /zh-cn/ -> 200 zh title;
+  /hrpauth/ -> 200 "HRPAuth | One account for the MatchCore ecosystem";
+  /zh-cn/hrpauth/ -> 200; unknown path -> 404; outbound hrefs are
+  wiki.mcnb.dev, auth.mcnb.dev, and CoreMatch GitHub URLs
+- Production (read via operator access) [xref]:
+  /www/server/panel/vhost/nginx/mcnb.dev.conf (static vhost, root
+  /www/wwwroot/mcnb.dev); /www/wwwroot/mcnb.dev listing (portal artifacts,
+  www:www); /www/wwwroot/mcnb.dev.bak-20261108 (full backup of the replaced
+  sample site); `grep server_name` over all panel vhosts shows mcnb.dev
+  claimed exactly once
+- `dig mcnb.dev MX`/`TXT` -> empty (2026-11-08); workspace-wide grep for
+  `https://mcnb.dev/` in /home/lnb/Desktop/HA -> no matches
