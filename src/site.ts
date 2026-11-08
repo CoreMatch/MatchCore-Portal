@@ -10,7 +10,7 @@ export const siteConfig = {
 export const siteConfigHrpauth = {
   haprojectName: 'HRPAuth',
   haprojectSubtitle: 'The authentication core and account portal of the MatchCore ecosystem',
-  hadocsUrl: 'https://wiki.mcnb.dev/projects/hrpauth/',
+  hadocsUrl: 'https://wiki.mcnb.dev/HRPAuth/',
   harepoUrl: 'https://github.com/CoreMatch/HRPAuth',
   hademoUrl: 'https://auth.mcnb.dev/',
   hacommunityUrl: 'https://github.com/CoreMatch/HRPAuth/issues',
