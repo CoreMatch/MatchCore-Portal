@@ -35,11 +35,7 @@
     "modes.m2.title": "Bedwars 2v2",
     "modes.m2.desc": "双人组队：分工、资源与配合决定胜负。",
     "modes.elo.title": "加权 Elo 如何计算",
-    "modes.elo.desc": "每场结束的对局由服务端统一结算：以 Elo 期望胜率为底，叠加生存、连胜与个人表现权重。",
-    "modes.elo.formula": "Δ = K × (S − E) × W_round × W_streak × W_perf",
-    "modes.elo.l1": "E：基于双方队伍平均分数的期望胜率",
-    "modes.elo.l2": "W：生存、连胜、个人表现三类权重",
-    "modes.elo.l3": "客户端与游戏服不写分，结算结果计入战绩",
+    "modes.elo.desc": "每局结束后由服务端统一结算：按对手强度、对局表现与连胜计算分数变化，客户端与游戏服只读。",
     "modes.rank.note": "排行榜与你的名次在客户端登录后查看。",
     "account.title": "账号体系与安全",
     "account.desc": "HRPAuth 是生态的统一认证核心：注册、登录与账号安全都在账号门户完成。",
@@ -55,8 +51,8 @@
     "eco.wiki.desc": "生态维基：指南、配置参考与常见问题。",
     "eco.source.title": "源代码",
     "eco.source.desc": "客户端与竞技场服务公开开发，问题与建议提交到议题跟踪器。",
-    "eco.status.title": "服务状态",
-    "eco.status.desc": "Arena 服务的公开健康检查端点，实时可查。",
+    "eco.status.title": "服务状态（接口）",
+    "eco.status.desc": "Arena 服务的公开健康检查接口，打开后看到的是 JSON 响应。",
     "resources.action": "前往查看"
   },
   "en": {
@@ -95,11 +91,7 @@
     "modes.m2.title": "Bedwars 2v2",
     "modes.m2.desc": "Team of two: roles, resources, and coordination decide the match.",
     "modes.elo.title": "How weighted Elo works",
-    "modes.elo.desc": "Every finished match is settled on the server: Elo expected score as the base, weighted by survival, streaks, and individual performance.",
-    "modes.elo.formula": "Δ = K × (S − E) × W_round × W_streak × W_perf",
-    "modes.elo.l1": "E: expected score from both teams' average ratings",
-    "modes.elo.l2": "W: survival, streak, and performance weights",
-    "modes.elo.l3": "Clients and game servers never write scores; settled results go into your career",
+    "modes.elo.desc": "Every finished match is settled on the server: score changes are computed from opponent strength, match performance, and streaks. Clients and game servers are read-only.",
     "modes.rank.note": "Leaderboards and your own rank are available after logging in to the client.",
     "account.title": "Account & Security",
     "account.desc": "HRPAuth is the ecosystem's unified authentication core: registration, login, and account security all happen in the account portal.",
@@ -115,8 +107,8 @@
     "eco.wiki.desc": "The ecosystem wiki: guides, configuration references, and FAQs.",
     "eco.source.title": "Source Code",
     "eco.source.desc": "The client and the arena service are developed in the open; report issues on the tracker.",
-    "eco.status.title": "Service Status",
-    "eco.status.desc": "The arena service's public health endpoint, checkable any time.",
+    "eco.status.title": "Service Status (API)",
+    "eco.status.desc": "The arena service's public health-check endpoint — it opens as a JSON response.",
     "resources.action": "Open"
   }
 }

@@ -21,16 +21,15 @@ The site publishes exactly two pages, each with a zh-cn mirror:
   a four-step "How It Works" (register at the account portal, set up the
   client, log in and queue, play and climb) with real entry points
   (src/components/HomePage.astro::steps); modes and rating — Bedwars 1v1/2v2
-  cards plus the weighted-Elo settlement formula
+  cards plus a plain-language summary of the server-side settlement
   (src/components/HomePage.astro::modes); account and security (registration,
   login, TOTP/WebAuthn two-factor); ecosystem entry cards — wiki, source, and
-  the arena service's public health endpoint
-  (src/components/HomePage.astro::ecoLinks). Every claim is backed by the
+  the arena service's public health endpoint, labeled as an API that opens as
+  JSON (src/components/HomePage.astro::ecoLinks). Every claim is backed by the
   MatchCoreArena code: only Bedwars is wired up end to end
   (MatchCoreArena-Server `match_type` is a free-form string with bedwars as the
   only integrated mode via BedwarsRel-MCA), the rating engine is a server-side
-  weighted Elo settled as Δ = K × (S − E) × W_round × W_streak × W_perf
-  (MatchCoreArena-Server knowledge/0001), and the client provides
+  weighted Elo (MatchCoreArena-Server knowledge/0001), and the client provides
   queue/career/rankings/friends (MatchCoreArena-Client README). No anti-cheat
   claims and no usage statistics are published, because neither exists in code.
 - `/hrpauth` — the HRPAuth service landing: one account for the ecosystem,
@@ -82,6 +81,10 @@ shadows/glass/gradients), mirroring the ecosystem's shared design system
 - The homepage publishes no usage statistics (players/matches/regions) at all;
   the hero fact bar carries capability facts instead. Adding any number to the
   front page requires a real data source behind it.
+- Technical detail stays out of the portal: the weighted-Elo settlement formula
+  is not rendered on the homepage (plain language only), and no link is written
+  until the wiki has a rating page — on 2026-11-08 the wiki served no
+  MatchCoreArena page (probed paths answered 404).
 - The zh-cn and en bundles carry identical key sets (checked programmatically);
   any future content must be added to both bundles and to the arrays in
   src/components/HomePage.astro (facts, steps, modes, accountItems, ecoLinks).
@@ -99,7 +102,8 @@ shadows/glass/gradients), mirroring the ecosystem's shared design system
   src/pages/hrpauth.astro:48-53 fp=e4e5b29b;
   src/i18n/pages/home.json (field: hero.ctaPrimary),
   src/i18n/pages/home.json (field: howto.step2.desc),
-  src/i18n/pages/home.json (field: modes.elo.formula);
+  src/i18n/pages/home.json (field: modes.elo.desc),
+  src/i18n/pages/home.json (field: eco.status.title);
   src/i18n/pages/hrpauth.json (field: meta.title),
   src/i18n/pages/hrpauth.json (field: features.item3.title),
   src/i18n/pages/hrpauth.json (field: about.p2);
