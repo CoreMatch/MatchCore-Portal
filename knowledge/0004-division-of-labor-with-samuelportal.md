@@ -14,8 +14,8 @@ records what is verifiable and marks intent as pending author confirmation.
 Observed arrangement:
 
 - MatchCore-Portal is product-facing: bilingual (en/zh-cn) landing pages for MatchCore
-  Arena and HRPAuth that send visitors outward to wiki.samuelcheston.com,
-  auth.samuelcheston.com, and CoreMatch repositories (src/site.ts:1-16).
+  Arena and HRPAuth that send visitors outward to wiki.mcnb.dev,
+  auth.mcnb.dev, and CoreMatch repositories (src/site.ts:1-17 fp=a9bfb5fc).
 - SamuelPortal is the author's personal portfolio at http://samuelcheston.com/
   (/home/lnb/SamuelPortal/astro.config.mjs (field: samuelcheston.com)): English-only,
   with a homepage, a /projects directory, and an /about page (SamuelPortal
@@ -33,9 +33,9 @@ Observed arrangement:
   without a documented split, content can drift or duplicate (project descriptions
   exist both in SamuelPortal src/projects.ts and in this site's i18n bundles).
 - SamuelPortal's entry for MatchCore-Portal points to
-  https://github.com/CoreMatch/MatchCore-Portal, while this repository's actual remote
-  is https://github.com/SamuelCheston/MatchCore-Portal.git — a stale URL in the
-  directory (see entry 0005).
+  https://github.com/CoreMatch/MatchCore-Portal, which matches this repository's
+  remote now that it lives under the CoreMatch organization (see entry 0005); the
+  earlier mismatch no longer applies.
 - The two codebases are separate and technically different (SamuelPortal is Astro
   ^6.0.4 with MDX and sitemap, no i18n —
   /home/lnb/SamuelPortal/package.json (field: @astrojs/mdx) — while this
@@ -44,9 +44,8 @@ Observed arrangement:
   the intended scope boundary is pending author confirmation.
 
 ## Evidence
-- This repository: src/site.ts:1-16; URL scan of src/ shows only
-  wiki.samuelcheston.com, auth.samuelcheston.com, github.com/CoreMatch/*, and one
-  trae.ai image URL (src/components/Banner.astro (field: text_to_image))
+- This repository: src/site.ts:1-17 fp=a9bfb5fc; URL scan of src/ shows only
+  wiki.mcnb.dev, auth.mcnb.dev, and github.com/CoreMatch/*
 - SamuelPortal (read-only reference):
   /home/lnb/SamuelPortal/astro.config.mjs (field: samuelcheston.com) (site
   'http://samuelcheston.com/'); /home/lnb/SamuelPortal/package.json (field: @astrojs/mdx)

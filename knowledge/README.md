@@ -13,9 +13,9 @@ HA-Contract, fix the entry, not the contract.
 |----|-------|--------|---------|
 | [0001](0001-astro-static-site-with-tailwind.md) | Astro Static Site with Tailwind CSS | accepted | The portal is a fully static Astro 7 site styled with Tailwind CSS v4, with no server runtime or adapter. |
 | [0002](0002-bilingual-content-via-duplicated-zh-cn-routes.md) | Bilingual Content via Duplicated /zh-cn Routes with English Default | accepted | English pages live at the root; each zh-cn page is a physical duplicate under /zh-cn/, with a client-side browser-language redirect. |
-| [0003](0003-two-landing-pages-linking-outward.md) | Scope Is Two Landing Pages Linking Outward for Docs, Demo, and Code | accepted | The site publishes exactly two product landing pages (MatchCore Arena and HRPAuth) and delegates docs, demo, source, and community to external endpoints. |
+| [0003](0003-two-landing-pages-linking-outward.md) | Scope Is Two Landing Pages Linking Outward for Docs, Account Portal, and Code | accepted | The site publishes exactly two product landing pages (MatchCore Arena and HRPAuth) written from a user's point of view, and delegates docs, account access, source, and community to external endpoints. |
 | [0004](0004-division-of-labor-with-samuelportal.md) | Division of Labor with SamuelPortal: Product Portal vs Personal Portfolio | accepted | MatchCore-Portal is the product-facing bilingual portal; SamuelPortal is the author's English-only personal portfolio; the two sites do not link to each other. |
-| [0005](0005-personal-account-hosting-no-deploy-pipeline.md) | Hosted Under the SamuelCheston Personal Account with No In-Repo Deployment Pipeline | accepted | Unlike the CoreMatch repositories it links to, this repository lives under the author's personal GitHub account, and no CI or deployment configuration exists in the tree. |
+| [0005](0005-personal-account-hosting-no-deploy-pipeline.md) | Repository Under the CoreMatch Organization; Build CI Only, No In-Repo Deployment Pipeline | accepted | The repository now lives under the CoreMatch organization with a build-only CI workflow; no deployment configuration exists in the tree and no live URL for the portal was found. |
 
 ## Maintenance
 

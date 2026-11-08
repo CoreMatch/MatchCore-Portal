@@ -1,56 +1,60 @@
-# 0005. Hosted Under the SamuelCheston Personal Account with No In-Repo Deployment Pipeline
+# 0005. Repository Under the CoreMatch Organization; Build CI Only, No In-Repo Deployment Pipeline
 
 ## Status
 accepted
 
 ## Context
-Most repositories of the ecosystem this portal links to live under the CoreMatch
-GitHub organization (e.g., CoreMatch/MatchCoreArena-Client and CoreMatch/HRPAuth —
-src/site.ts (field: CoreMatch/MatchCoreArena-Client),
-src/site.ts (field: CoreMatch/HRPAuth)). This repository is the exception: its
-remote sits under the author's personal account. How the built site reaches
-production is likewise not visible inside the repository.
+The repository originally lived under the author's personal GitHub account while
+the ecosystem repositories it links to sit under the CoreMatch organization. It
+has since moved to CoreMatch, and a minimal build CI was added; how the built
+site reaches production is still not visible inside the repository.
 
 ## Decision
 Observed state:
 
-- The repository is hosted at github.com/SamuelCheston/MatchCore-Portal, not under the
-  CoreMatch organization. No file in the repository (README.md (field: # MatchCore-Portal)
-  is title-only; AGENTS.md covers development only) explains the choice.
-- The tracked tree contains no deployment pipeline: no .github/workflows, no hosting
-  adapter, no `site` property in astro.config.mjs, and nothing beyond dev-server
-  tooling (.vscode/launch.json (field: astro dev) runs `astro dev`). Deployment target
-  and mechanism: not verified.
-- The only domain signals are the outbound links to wiki.samuelcheston.com and
-  auth.samuelcheston.com (src/site.ts (field: samuelcheston.com)). Whether the portal
-  itself is published on a samuelcheston.com subdomain or elsewhere is pending author
-  confirmation.
+- The repository is hosted at github.com/CoreMatch/MatchCore-Portal. The former
+  SamuelCheston/MatchCore-Portal URL redirects there (both URLs resolve to the
+  same HEAD via `git ls-remote`, and the GitHub API reports full_name
+  CoreMatch/MatchCore-Portal for both). No file in the repository (README.md
+  (field: # MatchCore-Portal) is title-only; AGENTS.md covers development only)
+  documents the hosting choice.
+- The tracked tree contains a CI workflow that only installs dependencies and
+  builds (.github/workflows/ci.yml (field: npm run build)). There is no hosting
+  adapter, no `site` property in astro.config.mjs, no Pages configuration
+  (GitHub API `pages` endpoint returns 404 for the repository), and no deploy
+  step. Deployment target and mechanism: not verified.
+- The site publishes outbound links to wiki.mcnb.dev and auth.mcnb.dev plus
+  CoreMatch GitHub repositories (src/site.ts (field: mcnb.dev)). No live URL
+  serving this portal was found on 2026-11-08: GitHub Pages paths under
+  samuelcheston.github.io return 404, and the mcnb.dev subdomains that answer
+  (matchcore.*, portal.*) serve the HRPAuth web app, not this site. Whether or
+  where the portal is published: pending author confirmation.
 
 ## Consequences
-- Discovery mismatch: SamuelPortal's project directory links this project as
-  CoreMatch/MatchCore-Portal
-  (/home/lnb/SamuelPortal/src/projects.ts (field: github.com/CoreMatch/MatchCore-Portal)),
-  which does not match the actual remote; anyone following that link will not reach
-  this repository unless it is later moved into the organization.
-- If the repository is moved to CoreMatch, existing clones' remotes break and must be
-  re-pointed; until then, personal-account hosting contrasts with the site's
-  CoreMatch-branded content (footer "© 2026 MatchCore",
-  src/i18n/common.json (field: footer.rights)).
-- With no in-repo deployment configuration, building and releasing the site depends on
-  tooling outside this repository; nothing in the tree lets a maintainer verify where
-  or how the site is served.
+- With no in-repo deployment configuration and no observed live URL, building
+  and releasing the site depends on tooling and decisions outside this
+  repository; a maintainer cannot verify from the tree where or how the site is
+  served. Publishing it (e.g. GitHub Pages or a mcnb.dev subdomain) is an
+  author decision still outstanding.
+- The repository homepage field on GitHub is empty; once a live URL exists it
+  should be set there and reflected here.
+- The local clone's origin should point at
+  https://github.com/CoreMatch/MatchCore-Portal.git; the old personal-account
+  URL keeps working only through GitHub's redirect.
 
 ## Evidence
-- `git remote -v` of this repository: origin
-  https://github.com/SamuelCheston/MatchCore-Portal.git (fetch and push)
-- `git ls-files` scan: no .github/, no CI, no deploy-config files;
-  .vscode/launch.json (field: astro dev) (astro dev only)
-- astro.config.mjs::defineConfig (no `site`, no adapter); package.json (field: scripts)
-  (scripts limited to dev/build/preview/astro)
-- src/site.ts (field: samuelcheston.com) (outbound samuelcheston.com subdomains);
-  src/site.ts (field: github.com/CoreMatch) (CoreMatch organization repositories)
-- README.md (field: # MatchCore-Portal) (title-only, no hosting or deployment notes)
-- /home/lnb/SamuelPortal/src/projects.ts (field: github.com/CoreMatch/MatchCore-Portal)
-  (directory entry using the CoreMatch/MatchCore-Portal URL)
-- Reason for personal-account hosting: not verified (no in-repo clue; pending author
-  confirmation). Deployment target: not verified
+- `git ls-remote` of both https://github.com/SamuelCheston/MatchCore-Portal.git
+  and https://github.com/CoreMatch/MatchCore-Portal.git returned the same HEAD
+  (6ec19a6) on 2026-11-08; GitHub API `repos/SamuelCheston/MatchCore-Portal`
+  reports full_name CoreMatch/MatchCore-Portal (redirect)
+- .github/workflows/ci.yml (build job only: checkout, setup-node, `npm ci`,
+  `npm run build`)
+- astro.config.mjs::defineConfig (no `site`, no adapter); package.json (field:
+  scripts) (scripts limited to dev/build/preview/astro)
+- GitHub API `repos/CoreMatch/MatchCore-Portal/pages` -> 404, `has_pages` false,
+  `homepage` null (checked 2026-11-08)
+- Probes on 2026-11-08: samuelcheston.github.io/MatchCore-Portal and
+  /matchcore-portal -> 404; matchcore.mcnb.dev and portal.mcnb.dev -> 200 but
+  serve the HRPAuth web app (title "HRPAuth")
+- src/site.ts (field: mcnb.dev) (outbound destinations); README.md (field:
+  # MatchCore-Portal) (title-only)
