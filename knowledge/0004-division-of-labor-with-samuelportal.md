@@ -7,11 +7,12 @@ accepted
 The author maintains a second portal repository, SamuelPortal
 (github.com/SamuelCheston/SamuelPortal; consulted read-only for this entry). Both are
 Astro sites in the same "portal" space, so their content scopes need to be distinct.
-Neither repository contains a document stating the division of labor; this entry
-records what is verifiable and marks intent as pending author confirmation.
+Neither repository contained a document stating the division of labor; on 2026-11-12
+the author ratified the observed split as the formal decision: each site manages its
+own content, and the two sites do not link to each other.
 
 ## Decision
-Observed arrangement:
+The division of labor, observed below and ratified by the author (2026-11-12):
 
 - MatchCore-Portal is product-facing: bilingual (en/zh-cn) landing pages for MatchCore
   Arena and HRPAuth that send visitors outward to wiki.mcnb.dev,
@@ -28,10 +29,16 @@ Observed arrangement:
   references MatchCore-Portal only by repository URL, never by a live site URL
   (/home/lnb/SamuelPortal/src/projects.ts (field: github.com/CoreMatch/MatchCore-Portal)).
 
+Anti-drift rule: the product narrative is authoritative in this repository's i18n
+bundles (src/i18n/); SamuelPortal's one-line description of MatchCore-Portal is a
+citation only and does not evolve independently. If the two ever diverge, the
+product site wins and SamuelPortal's copy is synced to it.
+
 ## Consequences
-- Overlap risk: both sites describe the MatchCore ecosystem from different angles, and
-  without a documented split, content can drift or duplicate (project descriptions
-  exist both in SamuelPortal src/projects.ts and in this site's i18n bundles).
+- Overlap exists but has a declared winner: both sites describe the MatchCore
+  ecosystem from different angles (project descriptions exist both in SamuelPortal
+  src/projects.ts and in this site's i18n bundles); on any divergence the product
+  site's i18n copy wins and SamuelPortal's citation is synced to it.
 - SamuelPortal's entry for MatchCore-Portal points to
   https://github.com/CoreMatch/MatchCore-Portal, which matches this repository's
   remote now that it lives under the CoreMatch organization (see entry 0005); the
@@ -40,8 +47,8 @@ Observed arrangement:
   ^6.0.4 with MDX and sitemap, no i18n —
   /home/lnb/SamuelPortal/package.json (field: @astrojs/mdx) — while this
   site is Astro ^7 with Tailwind and i18n); nothing is shared between them.
-- Because the division of labor is inferred from content rather than stated anywhere,
-  the intended scope boundary is pending author confirmation.
+- The boundary is now stated (this entry, author-ratified); future scope questions
+  are answered by this split, and changing the split requires a new entry.
 
 ## Evidence
 - This repository: src/site.ts:1-19 fp=9a602ac6; URL scan of src/ shows only
@@ -55,5 +62,6 @@ Observed arrangement:
   /home/lnb/SamuelPortal/src/pages/projects.astro (field: directory-intro);
   /home/lnb/SamuelPortal/src/pages/about.astro (field: about-story);
   /home/lnb/SamuelPortal/src/projects.ts (field: A bilingual portal for the wider MatchCore ecosystem)
-- Intended division of labor between the two portals: not verified (no in-repo
-  documentation; pending author confirmation)
+- Author decision (2026-11-12): the observed split is ratified — each site manages
+  its own content, the two sites do not link to each other, and the product
+  narrative is authoritative in this repository's i18n bundles
