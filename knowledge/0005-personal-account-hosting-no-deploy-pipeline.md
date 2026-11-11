@@ -44,8 +44,14 @@ Observed state:
   process on the production server.
 - The panel error pages 404.html/502.html are not portal content; they must be
   kept in place during future syncs because the vhost references them.
-- The repository homepage field on GitHub is empty; it can now be set to
-  https://mcnb.dev/ (author decision outstanding).
+- The GitHub repository homepage field is set to https://mcnb.dev/ (author
+  decision 2026-11-12), so repository visitors land directly on the product
+  site and the repo is discoverable by topic; the description reuses the
+  site's own `meta.description` copy verbatim, and `minecraft`, `bedwars`,
+  `matchmaking`, `astro`, `i18n` were added to the pre-existing topic set.
+  Entry points for future changes: `gh repo edit CoreMatch/MatchCore-Portal`
+  (`--homepage` / `--description` / `--add-topic` / `--remove-topic`) or the
+  repository Settings UI.
 
 ## Evidence
 - .github/workflows/ci.yml (build job only); astro.config.mjs::defineConfig
@@ -67,3 +73,8 @@ Observed state:
   `TXT` -> `"v=spf1 include:_spf.mx.cloudflare.net ~all"` (checked 2026-11-12);
   workspace-wide grep for `https://mcnb.dev/` in /home/lnb/Desktop/HA -> no
   matches
+- `gh repo view CoreMatch/MatchCore-Portal --json
+  homepageUrl,description,repositoryTopics` (2026-11-12): homepageUrl
+  https://mcnb.dev/, description equals src/i18n/pages/home.json
+  `en['meta.description']`, topics include minecraft/bedwars/matchmaking/
+  astro/i18n alongside the pre-existing set
