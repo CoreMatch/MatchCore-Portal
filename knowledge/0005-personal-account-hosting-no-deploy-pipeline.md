@@ -37,9 +37,11 @@ Observed state:
 - Publishing a change requires the manual build-and-sync sequence against the
   production server; nothing in the tree automates it, and CI only proves the
   build.
-- The apex serves only this site (verified 2026-11-08: no MX/TXT records, no
-  ecosystem code referencing the apex URL, and the directory previously held
-  only the panel sample page), so the portal displaces no other service.
+- The apex serves only this site (no ecosystem code references the apex URL,
+  and the directory previously held only the panel sample page), so the portal
+  displaces no other service. Mail for the domain is handled by Cloudflare
+  Email Routing (`contact@mcnb.dev` receives mail); it is not served by any
+  process on the production server.
 - The panel error pages 404.html/502.html are not portal content; they must be
   kept in place during future syncs because the vhost references them.
 - The repository homepage field on GitHub is empty; it can now be set to
@@ -61,5 +63,7 @@ Observed state:
   www:www); /www/wwwroot/mcnb.dev.bak-20261108 (full backup of the replaced
   sample site); `grep server_name` over all panel vhosts shows mcnb.dev
   claimed exactly once
-- `dig mcnb.dev MX`/`TXT` -> empty (2026-11-08); workspace-wide grep for
-  `https://mcnb.dev/` in /home/lnb/Desktop/HA -> no matches
+- `dig mcnb.dev MX` -> Cloudflare Email Routing (`route1/2/3.mx.cloudflare.net`),
+  `TXT` -> `"v=spf1 include:_spf.mx.cloudflare.net ~all"` (checked 2026-11-12);
+  workspace-wide grep for `https://mcnb.dev/` in /home/lnb/Desktop/HA -> no
+  matches
