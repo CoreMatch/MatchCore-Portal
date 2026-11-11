@@ -17,7 +17,6 @@ const lang = getLangFromUrl(Astro.url);
 		<meta charset="UTF-8" />
                 <meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="theme-color" content="#f8f7fb" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<meta property="og:type" content="website" />
@@ -27,7 +26,7 @@ const lang = getLangFromUrl(Astro.url);
 		<meta name="twitter:card" content="summary_large_image" />
 		<title>{title}</title>
 	</head>
-	<body class="bg-arena-base text-arena-ink font-sans antialiased">
+	<body class="bg-arena-base text-arena-ink font-sans antialiased selection:bg-arena-accent/40 selection:text-white">
 		<slot />
 	</body>
 </html>
