@@ -10,11 +10,11 @@ export const siteConfig = {
   contactEmail: 'contact@mcnb.dev',
 }
 
-export const siteConfigHrpauth = {
-  haprojectName: 'HRPAuth',
-  haprojectSubtitle: 'The authentication core and account portal of the MatchCore ecosystem',
-  hadocsUrl: 'https://wiki.mcnb.dev/HRPAuth/',
-  harepoUrl: 'https://github.com/CoreMatch/HRPAuth',
-  hademoUrl: 'https://auth.mcnb.dev/',
-  hacommunityUrl: 'https://github.com/CoreMatch/HRPAuth/issues',
+export const siteConfigArmorial = {
+  name: 'Armorial',
+  subtitle: 'The authentication core and account portal of the MatchCore ecosystem',
+  docsUrl: 'https://wiki.mcnb.dev/deploy/armorial/',
+  repoUrl: 'https://github.com/CoreMatch/Armorial',
+  demoUrl: 'https://auth.mcnb.dev/',
+  communityUrl: 'https://github.com/CoreMatch/Armorial/issues',
 } as const;

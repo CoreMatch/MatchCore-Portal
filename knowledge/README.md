@@ -3,9 +3,9 @@
 This knowledge base is the project's memo to itself, hosted and maintained in this
 repository. It records internal design decisions so that future work understands why
 things are the way they are; entries describe the project's current state only, not
-its history. It does not define and does not override outward behavior. Outward behavior is defined by HA-Contract
+its history. It does not define and does not override outward behavior. Outward behavior is defined by Armorial Contract
 (https://github.com/SamuelCheston/HA-Contract). If an entry here ever conflicts with
-HA-Contract, fix the entry, not the contract.
+Armorial Contract, fix the entry, not the contract.
 
 ## Entries
 

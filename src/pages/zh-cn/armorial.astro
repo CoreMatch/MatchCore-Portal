@@ -1,13 +1,13 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Banner from '../components/Banner.astro';
-import Header from '../components/Header.astro';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
-import { siteConfig, siteConfigHrpauth } from '../site';
-import hrpauth from '../i18n/pages/hrpauth.json';
+import Layout from '../../layouts/Layout.astro';
+import Banner from '../../components/Banner.astro';
+import Header from '../../components/Header.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { siteConfig, siteConfigArmorial } from '../../site';
+import armorial from '../../i18n/pages/armorial.json';
 
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang, hrpauth);
+const t = useTranslations(lang, armorial);
 
 const features = [
   { title: t('features.item1.title'), description: t('features.item1.desc'), icon: 'SSO' },
@@ -24,32 +24,26 @@ const highlights = [
 ];
 
 const resources = [
-  { title: t('resources.docs.title'), description: t('resources.docs.desc'), href: siteConfigHrpauth.hadocsUrl },
-  { title: t('resources.demo.title'), description: t('resources.demo.desc'), href: siteConfigHrpauth.hademoUrl },
-  { title: t('resources.source.title'), description: t('resources.source.desc'), href: siteConfigHrpauth.harepoUrl },
+  { title: t('resources.docs.title'), description: t('resources.docs.desc'), href: siteConfigArmorial.docsUrl },
+  { title: t('resources.demo.title'), description: t('resources.demo.desc'), href: siteConfigArmorial.demoUrl },
+  { title: t('resources.source.title'), description: t('resources.source.desc'), href: siteConfigArmorial.repoUrl },
 ];
 ---
 
 <Layout title={t('meta.title')} description={t('meta.description')}>
-  <script is:inline>
-    // Check browser language for redirection
-    const userLang = navigator.language || navigator.userLanguage;
-    const isChinese = userLang.toLowerCase().startsWith('zh');
-    const hasRedirected = sessionStorage.getItem('hasRedirected');
-
-    if (isChinese && !hasRedirected) {
-      sessionStorage.setItem('hasRedirected', 'true');
-      window.location.pathname = '/zh-cn/hrpauth/';
-    }
-  </script>
-  <Header />
+  <Header
+    projectName={siteConfigArmorial.name}
+    brandMark="A"
+    docsUrl={siteConfigArmorial.docsUrl}
+    demoUrl={siteConfigArmorial.demoUrl}
+  />
 
   <main>
     <Banner
-      pageUi={hrpauth}
-      projectName={siteConfigHrpauth.haprojectName}
-      primaryHref={siteConfigHrpauth.hademoUrl}
-      secondaryHref={siteConfigHrpauth.hadocsUrl}
+      pageUi={armorial}
+      projectName={siteConfigArmorial.name}
+      primaryHref={siteConfigArmorial.demoUrl}
+      secondaryHref={siteConfigArmorial.docsUrl}
     />
 
     <section id="features" class="border-b border-arena-edge bg-arena-base py-20">
@@ -106,20 +100,20 @@ const resources = [
             <div class="space-y-6">
               <div>
                 <p class="text-sm uppercase tracking-[0.2em] text-arena-faint">{t('nav.docs')}</p>
-                <a href={siteConfigHrpauth.hadocsUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-arena-ink hover:text-arena-accent">
-                  {siteConfigHrpauth.hadocsUrl}
+                <a href={siteConfigArmorial.docsUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-arena-ink hover:text-arena-accent">
+                  Armorial 维基
                 </a>
               </div>
               <div>
                 <p class="text-sm uppercase tracking-[0.2em] text-arena-faint">{t('nav.demo')}</p>
-                <a href={siteConfigHrpauth.hademoUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-arena-ink hover:text-arena-accent">
-                  {siteConfigHrpauth.hademoUrl}
+                <a href={siteConfigArmorial.demoUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-arena-ink hover:text-arena-accent">
+                  {siteConfigArmorial.demoUrl}
                 </a>
               </div>
               <div>
                 <p class="text-sm uppercase tracking-[0.2em] text-arena-faint">{t('nav.source')}</p>
-                <a href={siteConfigHrpauth.harepoUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-arena-ink hover:text-arena-accent">
-                  {siteConfigHrpauth.harepoUrl}
+                <a href={siteConfigArmorial.repoUrl} target="_blank" rel="noreferrer" class="mt-2 block text-lg font-semibold text-arena-ink hover:text-arena-accent">
+                  {siteConfigArmorial.repoUrl}
                 </a>
               </div>
             </div>
@@ -157,13 +151,13 @@ const resources = [
 
   <footer class="border-t border-arena-edge bg-arena-base py-12">
     <div class="container mx-auto flex flex-col gap-6 px-4 md:flex-row md:items-center md:justify-between">
-      <p class="text-sm text-arena-faint">{t('footer.rights')}</p>
+      <p class="text-sm text-arena-faint">{t('footer.armorial.rights')}</p>
 
       <div class="flex flex-wrap items-center gap-5 text-sm font-medium text-arena-muted">
-        <a href={siteConfigHrpauth.hadocsUrl} target="_blank" rel="noreferrer" class="hover:text-arena-ink">{t('footer.docs')}</a>
-        <a href={siteConfigHrpauth.hademoUrl} target="_blank" rel="noreferrer" class="hover:text-arena-ink">{t('footer.demo')}</a>
-        <a href={siteConfigHrpauth.harepoUrl} target="_blank" rel="noreferrer" class="hover:text-arena-ink">{t('footer.source')}</a>
-        <a href={siteConfigHrpauth.hacommunityUrl} target="_blank" rel="noreferrer" class="hover:text-arena-ink">{t('footer.community')}</a>
+        <a href={siteConfigArmorial.docsUrl} target="_blank" rel="noreferrer" class="hover:text-arena-ink">{t('footer.docs')}</a>
+        <a href={siteConfigArmorial.demoUrl} target="_blank" rel="noreferrer" class="hover:text-arena-ink">{t('footer.demo')}</a>
+        <a href={siteConfigArmorial.repoUrl} target="_blank" rel="noreferrer" class="hover:text-arena-ink">{t('footer.source')}</a>
+        <a href={siteConfigArmorial.communityUrl} target="_blank" rel="noreferrer" class="hover:text-arena-ink">{t('footer.community')}</a>
         <a href={`mailto:${siteConfig.contactEmail}`} class="hover:text-arena-ink">{t('footer.contact')}</a>
       </div>
     </div>

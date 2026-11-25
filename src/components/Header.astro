@@ -5,26 +5,36 @@ import { siteConfig } from '../site';
 
 interface Props {
   navItems?: { name: string; href: string }[];
+  projectName?: string;
+  brandMark?: string;
+  docsUrl?: string;
+  demoUrl?: string;
 }
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
-const { navItems = [
+const {
+  navItems = [
   { name: t('nav.home'), href: translatePath('/') },
   { name: t('nav.features'), href: '#features' },
   { name: t('nav.about'), href: '#about' },
   { name: t('nav.resources'), href: '#resources' },
-] } = Astro.props;
+  ],
+  projectName = siteConfig.projectName,
+  brandMark = 'M',
+  docsUrl = siteConfig.docsUrl,
+  demoUrl = siteConfig.demoUrl,
+} = Astro.props;
 ---
 
 <header class="sticky top-0 z-50 w-full border-b border-arena-edge bg-arena-base/95 backdrop-blur-md">
   <div class="container mx-auto px-4 h-16 flex items-center justify-between">
     <div class="flex items-center gap-2">
       <a href={translatePath('/')} class="flex items-center gap-2">
-        <div class="w-8 h-8 bg-arena-accent rounded-md flex items-center justify-center text-white font-bold">M</div>
-        <span class="text-xl font-bold tracking-tight text-arena-ink">{siteConfig.projectName}</span>
+        <div class="w-8 h-8 bg-arena-accent rounded-md flex items-center justify-center text-white font-bold">{brandMark}</div>
+        <span class="text-xl font-bold tracking-tight text-arena-ink">{projectName}</span>
       </a>
     </div>
 
@@ -50,7 +60,7 @@ const { navItems = [
 
       <div class="hidden sm:flex items-center gap-3">
         <a
-          href={siteConfig.docsUrl}
+          href={docsUrl}
           target="_blank"
           rel="noreferrer"
           class="text-sm font-medium text-arena-muted hover:text-arena-ink"
@@ -58,7 +68,7 @@ const { navItems = [
           {t('nav.docs')}
         </a>
         <a
-          href={siteConfig.demoUrl}
+          href={demoUrl}
           target="_blank"
           rel="noreferrer"
           class="bg-arena-accent text-white px-4 py-2 rounded-md text-sm font-medium hover:opacity-90 transition-opacity"

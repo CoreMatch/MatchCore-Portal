@@ -7,19 +7,19 @@
 
 MatchCore is a competitive Bedwars platform built around focused 1v1 and 2v2 matches, weighted Elo ratings, and a clear record of every result.
 
-This repository powers [mcnb.dev](https://mcnb.dev/), the bilingual home for MatchCore Arena and the HA ecosystem.
+This repository powers [mcnb.dev](https://mcnb.dev/), the bilingual home for MatchCore Arena and the Armorial ecosystem.
 
 ## Why MatchCore
 
 - **Built for competition.** Step into ranked Bedwars with a rating that reflects every completed match.
 - **Your results stay visible.** Career history, rankings, and score changes give progress a lasting record.
-- **One identity across the ecosystem.** HRPAuth connects players, services, and their Minecraft experience.
+- **One identity across the ecosystem.** Armorial connects players, services, and their Minecraft experience.
 
 ## Explore
 
 - [MatchCore Arena](https://mcnb.dev/) — the competitive experience
-- [HRPAuth](https://auth.mcnb.dev/) — accounts and ecosystem services
-- [HA Wiki](https://wiki.mcnb.dev/) — deployment and development documentation
+- [Armorial](https://auth.mcnb.dev/) — accounts and ecosystem services
+- [Armorial Wiki](https://wiki.mcnb.dev/) — deployment and development documentation
 - [Arena Client](https://github.com/CoreMatch/MatchCoreArena-Client) — desktop client source
 
 ## About this site

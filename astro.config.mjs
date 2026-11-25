@@ -12,6 +12,10 @@ export default defineConfig({
       prefixDefaultLocale: false
     }
   },
+  redirects: {
+    '/hrpauth': '/armorial',
+    '/zh-cn/hrpauth': '/zh-cn/armorial',
+  },
   vite: {
     plugins: [tailwindcss()]
   }
